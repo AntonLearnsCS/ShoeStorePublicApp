@@ -72,8 +72,6 @@ class LoginStart : Fragment() {
         //Q: Why can I not call "findViewbyId" on the login fragment but can do so in MainActivity.kt?
         //A: https://stackoverflow.com/questions/9228777/findviewbyid-not-working-in-a-not-mainactivity-class
 
-        val emailAddress = binding.emailAddressText.text
-
         //R.id.email_address_text.
 
         //returns the root of the xml file being inflated

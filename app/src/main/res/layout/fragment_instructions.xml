@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".instructions.Instructions">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <TextView
+        android:id="@+id/Instructions_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/instructions" />
+
+        <Button
+            android:id="@+id/List_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="List"
+            app:layout_constraintBottom_toBottomOf="@+id/Instructions_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </Button>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
