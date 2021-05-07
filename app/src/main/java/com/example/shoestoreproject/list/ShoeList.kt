@@ -53,6 +53,7 @@ class ShoeList : Fragment() {
         val vi : LayoutInflater = this.context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val v: View = vi.inflate(R.layout.customview, null)
         //adding a view to the LinearLayout
+        //https://stackoverflow.com/questions/2395769/how-to-programmatically-add-views-to-views
         val myLayout: LinearLayout = binding.layoutId
         //val addedItem  = view
         v.setLayoutParams(
