@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 //import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.example.shoestoreproject.R
 import com.example.shoestoreproject.databinding.FragmentShoeListBinding
@@ -17,7 +19,7 @@ import com.example.shoestoreproject.databinding.FragmentShoeListBinding
 
 class ShoeList : Fragment() {
 
-    private lateinit var binding : FragmentShoeListBinding
+     private lateinit var binding : FragmentShoeListBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,7 +39,8 @@ class ShoeList : Fragment() {
             container,
             false
         )
-        //binding.FABButton.setOnClickListener {addCustomView()  }
+
+        binding.FABButton.setOnClickListener {view: View? ->  view?.findNavController()?.navigate(R.id.action_shoeList_to_shoeDetail) }
 
 
         //binding.secondRowText.text = "Hello"

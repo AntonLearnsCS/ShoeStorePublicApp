@@ -25,7 +25,11 @@
         android:id="@+id/shoeList"
         android:name="com.example.shoestoreproject.list.ShoeList"
         android:label="fragment_shoe_list"
-        tools:layout="@layout/fragment_shoe_list" />
+        tools:layout="@layout/fragment_shoe_list" >
+        <action
+            android:id="@+id/action_shoeList_to_shoeDetail"
+            app:destination="@id/shoeDetail" />
+    </fragment>
     <fragment
         android:id="@+id/instructions"
         android:name="com.example.shoestoreproject.instructions.Instructions"
@@ -33,6 +37,14 @@
         tools:layout="@layout/fragment_instructions" >
         <action
             android:id="@+id/action_instructions_to_shoeList"
+            app:destination="@id/shoeList" />
+    </fragment>
+    <fragment
+        android:id="@+id/shoeDetail"
+        android:name="com.example.shoestoreproject.list.ShoeDetail"
+        android:label="ShoeDetail" >
+        <action
+            android:id="@+id/action_shoeDetail_to_shoeList"
             app:destination="@id/shoeList" />
     </fragment>
 </navigation>
