@@ -22,7 +22,6 @@ import com.example.shoestoreproject.databinding.FragmentLoginBinding
 class LoginStart : Fragment() {
     //initialize the binding object
     private lateinit var viewModel: LoginStartViewModel
-    private lateinit var hashMap: MutableMap<String,String>
     private lateinit var binding: FragmentLoginBinding
     //private lateinit var viewModelLogin: LoginViewModel
     override fun onCreateView(
@@ -32,7 +31,8 @@ class LoginStart : Fragment() {
         //note need to implement Gradle dependency for lifecycle before using "this"
         viewModel = ViewModelProvider(this).get(LoginStartViewModel::class.java)
 //ViewModelProvider(this.context).get(LoginStartViewModel::class.java)
-        val emailText = binding.emailAddressText.toString()
+        //updated in real time?
+//        val emailText = binding.emailAddressText.toString()
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(
             inflater,
@@ -42,16 +42,26 @@ class LoginStart : Fragment() {
         )
 
         binding.loginButton.setOnClickListener { view: View? ->
-            if (view != null && checkOldEmail()) {
+            //pass in email text from editText to viewModel
+            viewModel.setEmail(binding.emailAddressText.text.toString())
+            viewModel.setPassword(binding.passwordText.text.toString())
+            if (view != null && viewModel.checkOldEmail()) {
                 view.findNavController().navigate(R.id.action_login_to_welcome)
             }
+            else
+                Toast.makeText(this.context,"Email does not exist", Toast.LENGTH_SHORT).show()
+
         }
 
         binding.newUserButton.setOnClickListener { view: View ->
-            if (checkNewEmail())
+            viewModel.setEmail(binding.emailAddressText.text.toString())
+            viewModel.setPassword(binding.passwordText.text.toString())
+            if (viewModel.checkNewEmail())
             {
                 view.findNavController().navigate(R.id.action_login_to_welcome)
             }
+            else
+                Toast.makeText(this.context,"Email already in use", Toast.LENGTH_SHORT).show()
         }
 
 

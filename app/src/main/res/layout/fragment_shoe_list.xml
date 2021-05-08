@@ -5,12 +5,14 @@
 
     android:orientation="vertical"
     >
+
     <!-- Note: We do not set the width and height of layout if we are declaring
     multiple view/view groups-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
          >
+
 
         <LinearLayout
             android:id="@+id/layout_id"
@@ -20,34 +22,28 @@
             android:clickable="true">
 
 
-            <TextView
-                android:id="@+id/firstRow_text"
-                android:layout_width="272dp"
-                android:layout_height="wrap_content"
-                android:text="shoeOne"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                />
+
+            </LinearLayout>
 
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/FAB_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="right">
 
             </com.google.android.material.floatingactionbutton.FloatingActionButton>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            </LinearLayout>
-
-
 
 
         </LinearLayout>
 
+
     </ScrollView>
+
 
 
 </layout>

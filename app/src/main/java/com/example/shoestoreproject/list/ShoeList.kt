@@ -29,6 +29,7 @@ class ShoeList : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(
             inflater,
@@ -36,7 +37,7 @@ class ShoeList : Fragment() {
             container,
             false
         )
-        binding.FABButton.setOnClickListener {addCustomView()  }
+        //binding.FABButton.setOnClickListener {addCustomView()  }
 
 
         //binding.secondRowText.text = "Hello"
