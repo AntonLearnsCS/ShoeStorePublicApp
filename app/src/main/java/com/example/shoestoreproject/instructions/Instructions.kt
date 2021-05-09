@@ -24,7 +24,6 @@ class Instructions : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_instructions,
@@ -35,6 +34,7 @@ class Instructions : Fragment() {
             if (view != null) {
                 view.findNavController().navigate(R.id.action_instructions_to_shoeList)
             }
+
         }
         return binding.root//return inflater.inflate(R.layout.fragment_instructions, container, false)
     }

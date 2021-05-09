@@ -6,10 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 //import androidx.test.core.app.ApplicationProvider.getApplicationContext
@@ -18,12 +22,8 @@ import com.example.shoestoreproject.databinding.FragmentShoeListBinding
 
 
 class ShoeList : Fragment() {
-
+    private lateinit var viewModel : ShoeViewModel
      private lateinit var binding : FragmentShoeListBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
     //Q: Need to select views from LinearLayout so I can reference them using the Floating Action Button
     //https://stackoverflow.com/questions/7552333/android-linearlayout-background-selector
 
@@ -42,7 +42,14 @@ class ShoeList : Fragment() {
 
         binding.FABButton.setOnClickListener {view: View? ->  view?.findNavController()?.navigate(R.id.action_shoeList_to_shoeDetail) }
 
-
+        viewModel = ViewModelProvider(this).get(ShoeViewModel::class.java)
+        //Q: LiveData is reverting to its default value..
+        viewModel.saved.observe(viewLifecycleOwner, Observer { saved ->
+            if (saved)
+            {
+                addCustomView()
+            }
+        })
         //binding.secondRowText.text = "Hello"
 
 
@@ -58,7 +65,7 @@ class ShoeList : Fragment() {
         val v: View = vi.inflate(R.layout.customview, null)
         //adding a view to the LinearLayout
         //https://stackoverflow.com/questions/2395769/how-to-programmatically-add-views-to-views
-        val myLayout: LinearLayout = binding.layoutId
+        val myLayout: ScrollView = binding.shoeList
         //val addedItem  = view
         v.setLayoutParams(
             LinearLayout.LayoutParams(
@@ -66,8 +73,6 @@ class ShoeList : Fragment() {
                 LinearLayout.LayoutParams.MATCH_PARENT
             )
         )
-
         myLayout.addView(v)
     }
-
 }

@@ -14,7 +14,7 @@
             android:id="@+id/label_text"
             android:layout_width="69dp"
             android:layout_height="48dp"
-            android:text="TextView"
+            android:text="#1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/companyName_text"
             app:layout_constraintStart_toStartOf="parent"

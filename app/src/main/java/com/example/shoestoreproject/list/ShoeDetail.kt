@@ -14,6 +14,7 @@ import androidx.navigation.findNavController
 import com.example.shoestoreproject.R
 import com.example.shoestoreproject.databinding.FragmentShoeDetailBinding
 import com.example.shoestoreproject.databinding.FragmentShoeListBinding
+import kotlinx.android.synthetic.main.fragment_shoe_list.*
 
 
 class ShoeDetail : Fragment() {
@@ -31,7 +32,7 @@ class ShoeDetail : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         viewModel = ViewModelProvider(this).get(ShoeViewModel::class.java)
-
+        //shoeList //= ""
 /*
 Create a new Shoe Detail destination that includes:
 
@@ -49,8 +50,10 @@ A Save button with an action to navigate back to the shoe list screen and add a 
         )
         binding.saveButton.setOnClickListener { view: View? ->
             //viewModel.addCustomView()
-            addView()
-                view?.findNavController()?.navigate(R.id.action_shoeDetail_to_shoeList)
+            viewModel.setBooleanTrue()
+            viewModel.setNum()
+            view?.findNavController()?.navigate(R.id.action_shoeDetail_to_shoeList)
+            //viewModel.setBooleanFalse()
         }
 
 
@@ -59,24 +62,9 @@ A Save button with an action to navigate back to the shoe list screen and add a 
     fun addView()
     {
         //not sure how to get context in viewModel to use this function there
-        val vi : LayoutInflater = this.context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val v: View = vi.inflate(R.layout.customview, null)
-        //adding a view to the LinearLayout
-        //https://stackoverflow.com/questions/2395769/how-to-programmatically-add-views-to-views
-
-        //TODO: How to reference a viewGroup from the ShoeList fragment?
-        val insertPoint : ViewGroup =  R.layout.fragment_shoe_list
-        //val myLayout: ScrollView = //bindingList.shoeList
-        //val addedItem  = view
-        v.setLayoutParams(
-            LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-        )
-        //insertPoint.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
-        //insertPoint.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
-        insertPoint.addView(v,0 )
-        //myLayout.addView(v)
+        //Q: Is it possible to reference a viewGroup of another fragment in this current fragment?
+        //A: It would appear not, as we R.layout only gives us access to the xml file name but not the viewGroups within
+        //The StackOverflow forums are implying that you must reference the viewGroup within the fragment the viewGroup is attached to.
     }
+
 }

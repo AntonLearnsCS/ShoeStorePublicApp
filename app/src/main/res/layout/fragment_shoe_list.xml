@@ -13,7 +13,6 @@
         android:id="@+id/shoeList"
          >
 
-
         <LinearLayout
             android:id="@+id/layout_id"
             android:layout_width="match_parent"
