@@ -47,7 +47,9 @@ A Save button with an action to navigate back to the shoe list screen and add a 
             viewModel.setBooleanTrue()
             viewModel.setNum()
             val saved = viewModel.saved.value
+            //TODO: Unsure why "ShoeDetailDirections" became invalid..
             val action = ShoeDetailDirections.actionShoeDetailToShoeList(saved)
+            //view.findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
             findNavController(this).navigate(action)
             //viewModel.setBooleanFalse()
         }

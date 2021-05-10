@@ -15,6 +15,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavArgs
+import androidx.navigation.NavArgument
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
@@ -46,7 +48,8 @@ class ShoeList : Fragment() {
 
         binding.FABButton.setOnClickListener {view: View? ->  view?.findNavController()?.navigate(R.id.action_shoeList_to_shoeDetail) }
 
-        val scoreFragmentArgs by navArgs<ShoeListArg>()
+        //TODO: Why is the ShoeListArgs object not being generated?
+        val scoreFragmentArgs by NavArgs<Shoe>()
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         //Q: LiveData is reverting to its default value..
@@ -84,8 +87,4 @@ class ShoeList : Fragment() {
         myLayout.addView(v)
     }
 
-    override fun onAttach(context: Context) {
-        if ()//resulting boolean is true, add viewGroup
-        super.onAttach(context)
-    }
 }

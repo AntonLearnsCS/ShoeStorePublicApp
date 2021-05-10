@@ -29,6 +29,10 @@
         <action
             android:id="@+id/action_shoeList_to_shoeDetail"
             app:destination="@id/shoeDetail" />
+        <argument
+            android:name="saved"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/instructions"
