@@ -1,37 +1,31 @@
 package com.example.shoestoreproject.list
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.ScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import com.example.shoestoreproject.MainViewModel
 import com.example.shoestoreproject.R
 import com.example.shoestoreproject.databinding.FragmentShoeDetailBinding
-import com.example.shoestoreproject.databinding.FragmentShoeListBinding
-import kotlinx.android.synthetic.main.fragment_shoe_list.*
 
 
 class ShoeDetail : Fragment() {
-    private lateinit var viewModel: ShoeViewModel
+    //    private val model: SharedViewModel by activityViewModels()
+    private lateinit var viewModel: MainViewModel//by MainViewModel
     private lateinit var binding : FragmentShoeDetailBinding
     //private lateinit var bindingList : FragmentShoeListBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        viewModel = ViewModelProvider(this).get(ShoeViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         //shoeList //= ""
 /*
 Create a new Shoe Detail destination that includes:
@@ -52,9 +46,17 @@ A Save button with an action to navigate back to the shoe list screen and add a 
             //viewModel.addCustomView()
             viewModel.setBooleanTrue()
             viewModel.setNum()
-            view?.findNavController()?.navigate(R.id.action_shoeDetail_to_shoeList)
+            val saved = viewModel.saved.value
+            val action = ShoeDetailDirections.actionShoeDetailToShoeList(saved)
+            findNavController(this).navigate(action)
             //viewModel.setBooleanFalse()
         }
+        /*
+          val currentScore = viewModel.score.value ?: 0
+                val action = GameFragmentDirections.actionGameToScore(currentScore)
+                findNavController(this).navigate(action)
+                viewModel.onGameFinishComplete()
+         */
 
 
         return binding.root

@@ -1,28 +1,22 @@
-package com.example.shoestoreproject.list
+package com.example.shoestoreproject
 
-import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.Navigation
-import com.example.shoestoreproject.MainActivity
-import com.example.shoestoreproject.R
 
-class ShoeViewModel : ViewModel() {
+class MainViewModel : ViewModel() {
+
     private val _saved = MutableLiveData<Boolean>()
     val saved : LiveData<Boolean>
-    get() = _saved
+        get() = _saved
     private val _num = MutableLiveData<Int>()
     val num : LiveData<Int>
-    get() = _num
+        get() = _num
     init {
         _saved.value = false
         _num.value = 0
     }
+
     fun addCustomView()
     {
 

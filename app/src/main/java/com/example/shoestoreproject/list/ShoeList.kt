@@ -1,5 +1,6 @@
 package com.example.shoestoreproject.list
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,14 +17,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
+import com.example.shoestoreproject.MainViewModel
 //import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.example.shoestoreproject.R
 import com.example.shoestoreproject.databinding.FragmentShoeListBinding
 
 
 class ShoeList : Fragment() {
-    private lateinit var viewModel : ShoeViewModel
-     private lateinit var binding : FragmentShoeListBinding
+    private lateinit var viewModel : MainViewModel
+    private lateinit var binding : FragmentShoeListBinding
+    private lateinit var factory : ShoeFactory
     //Q: Need to select views from LinearLayout so I can reference them using the Floating Action Button
     //https://stackoverflow.com/questions/7552333/android-linearlayout-background-selector
 
@@ -42,8 +46,12 @@ class ShoeList : Fragment() {
 
         binding.FABButton.setOnClickListener {view: View? ->  view?.findNavController()?.navigate(R.id.action_shoeList_to_shoeDetail) }
 
-        viewModel = ViewModelProvider(this).get(ShoeViewModel::class.java)
+        val scoreFragmentArgs by navArgs<ShoeListArg>()
+
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         //Q: LiveData is reverting to its default value..
+        //https://blog.mindorks.com/shared-viewmodel-in-android-shared-between-fragments potential solution but requires fragments to be added the
+        //xml file, which may disrupt the NavHostFragment
         viewModel.saved.observe(viewLifecycleOwner, Observer { saved ->
             if (saved)
             {
@@ -74,5 +82,10 @@ class ShoeList : Fragment() {
             )
         )
         myLayout.addView(v)
+    }
+
+    override fun onAttach(context: Context) {
+        if ()//resulting boolean is true, add viewGroup
+        super.onAttach(context)
     }
 }
