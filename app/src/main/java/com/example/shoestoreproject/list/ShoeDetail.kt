@@ -14,6 +14,8 @@ import com.example.shoestoreproject.R
 import com.example.shoestoreproject.databinding.FragmentShoeDetailBinding
 
 
+
+
 class ShoeDetail : Fragment() {
     //    private val model: SharedViewModel by activityViewModels()
     private lateinit var viewModel: MainViewModel//by MainViewModel
@@ -48,11 +50,14 @@ A Save button with an action to navigate back to the shoe list screen and add a 
             viewModel.setNum()
             val saved = viewModel.saved.value
             //TODO: Unsure why "ShoeDetailDirections" became invalid..
-            val action = ShoeDetailDirections.actionShoeDetailToShoeList(saved)
+            val action = ShoeDetailDirections.actionShoeDetailToShoeList(saved ?: false)
+            //val action = ShoeDetailDirections.actionShoeDetailToShoeList(saved ?: false)
             //view.findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
             findNavController(this).navigate(action)
             //viewModel.setBooleanFalse()
         }
+        binding.cancelButton.setOnClickListener { view: View? ->
+            findNavController(this).navigate(ShoeDetailDirections.actionShoeDetailToShoeList()) }
         /*
           val currentScore = viewModel.score.value ?: 0
                 val action = GameFragmentDirections.actionGameToScore(currentScore)
