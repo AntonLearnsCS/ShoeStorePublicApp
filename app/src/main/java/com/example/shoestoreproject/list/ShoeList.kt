@@ -47,7 +47,7 @@ class ShoeList : Fragment() {
             false
         )
         Timber.plant(Timber.DebugTree())
-
+        //TODO: Figure out why onCreate and onDestroyView are called twice after navigating from Shoedetail
         Timber.i("onCreateCalled")
         binding.FABButton.setOnClickListener {view: View? ->  view?.findNavController()?.navigate(R.id.action_shoeList_to_shoeDetail) }
 
