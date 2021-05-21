@@ -13,16 +13,47 @@ import com.example.shoestoreproject.MainActivity
 import com.example.shoestoreproject.R
 
 class ShoeListViewModel(saved : Boolean) : ViewModel() {
+    private var array : MutableLiveData<MutableList<LiveDataClass>>//MutableList<LiveDataClass>
+    val _array : LiveData<MutableList<LiveDataClass>>
+    get() = array
+
+    private lateinit var _companyName : MutableLiveData<String>
+
+
     private val _saved = MutableLiveData<Boolean>()
     val saved : LiveData<Boolean>
     get() = _saved
+
     private val _num = MutableLiveData<Int>()
     val num : LiveData<Int>
     get() = _num
+    //Q: Why can't you reference the mutableList object "array" outside of a method?
+
     init {
         _saved.value = saved
         _num.value = 0
+        array = MutableLiveData() //Collection<LiveDataClass>
     }
+
+    fun myFun()
+    {
+        array.value?.add(createObject())
+    }
+    fun createObject() : LiveDataClass
+    {
+        //pass in the information from shoeDetail to here
+        var myObject = LiveDataClass()
+        myObject._companyName.value
+        myObject._shoeName.value
+        return myObject
+    }
+
+    val mutableList : MutableList<LiveDataClass> = ArrayList()
+
+
+
+
+
     fun addCustomView()
     {
 
@@ -53,4 +84,15 @@ insertPoint.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL
         _saved.value = false
     }
 
+}
+public class LiveDataClass()
+{
+    val _companyName = MutableLiveData<String>()
+    val _shoeName = MutableLiveData<String>()
+    val _shoeSize = MutableLiveData<Int>()
+    val _shoeDescription = MutableLiveData<String>()
+    fun setCompanyName()
+    {
+        //_companyName.value =
+    }
 }

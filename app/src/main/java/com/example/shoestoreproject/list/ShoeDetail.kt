@@ -16,7 +16,7 @@ import com.example.shoestoreproject.databinding.FragmentShoeDetailBinding
 
 class ShoeDetail : Fragment() {
     //    private val model: SharedViewModel by activityViewModels()
-    private lateinit var viewModel: MainViewModel//by MainViewModel
+    private lateinit var viewModel: ShoeListViewModel//by MainViewModel
     private lateinit var binding : FragmentShoeDetailBinding
     //private lateinit var bindingList : FragmentShoeListBinding
 
@@ -25,7 +25,7 @@ class ShoeDetail : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ShoeListViewModel::class.java)
         //shoeList //= ""
 /*
 Create a new Shoe Detail destination that includes:
@@ -35,18 +35,23 @@ A TextView label and EditView for the Shoe Name, Company, Shoe Size and Descript
 A Cancel button with an action to navigate back to the shoe list screen
 A Save button with an action to navigate back to the shoe list screen and add a new Shoe to the Shoe View Model.
  */
-
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_shoe_detail,
             container,
             false
         )
+
         binding.saveButton.setOnClickListener { view: View? ->
             //viewModel.addCustomView()
             viewModel.setBooleanTrue()
             viewModel.setNum()
+
+            //update values in array in viewModel object
+            viewModel.num
             val saved = viewModel.saved.value
+
+
             //TODO: Unsure why "ShoeDetailDirections" became invalid..
             val action = ShoeDetailDirections.actionShoeDetailToShoeList(saved ?: false)
             //view.findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
