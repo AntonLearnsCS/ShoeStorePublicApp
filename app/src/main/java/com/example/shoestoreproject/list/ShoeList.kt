@@ -75,20 +75,34 @@ class ShoeList : Fragment() {
         //Also, the values of editText are not being saved in the viewModel
 
         //observing
+        //TODO: _array does not exists within ShoeList
         viewModel._array.observe(viewLifecycleOwner, Observer {  myArray ->
+            //myArray[0]
+            Log.i("array",myArray[0]._companyName.toString())
+        })
 
-                Log.i("array",myArray[0]._companyName.toString())
-               // v.companyName_text.append(viewModel._array.value?.get(0)?._companyName?.value)
+        viewModel.message.observe(viewLifecycleOwner, Observer {
+            Log.i("array", viewModel.message.value.toString())
 
-        } )
+            Log.i(
+                "array",
+                viewModel._array.value?.get(0)?._companyName.toString()
+            ) // myArray[0]._companyName.toString()
+            // v.companyName_text.append(viewModel._array.value?.get(0)?._companyName?.value)
 
-
-
+        })
 
 
         return binding.root//inflater.inflate(R.layout.fragment_shoe_list, container, false)
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel._array.observe(viewLifecycleOwner, Observer { myArray ->
+            //myArray[0]
+
+        })}
 
     fun addCustomView()
     {

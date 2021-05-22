@@ -39,10 +39,10 @@ class ShoeListViewModel(saved : Boolean) : ViewModel() {
     {
         //pass in the information from shoeDetail to here
         var myObject = LiveDataClass()
-        myObject._companyName.value
-        myObject._shoeName.value
-        array.value?.add(myObject)
-
+        //myObject._companyName.value
+        //myObject._shoeName.value
+        //array.value?.add(myObject)
+        _array.value?.add(0,myObject)
     }
 
     public class LiveDataClass()
@@ -63,7 +63,11 @@ class ShoeListViewModel(saved : Boolean) : ViewModel() {
     val mutableList : MutableList<LiveDataClass> = ArrayList()
 
 
+    val message = MutableLiveData<String>()
 
+    fun sendMessage(text: String) {
+        message.value = text
+    }
 
 
     fun addCustomView()
