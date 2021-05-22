@@ -6,27 +6,36 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.shoestoreproject.MainViewModel
 import com.example.shoestoreproject.R
 import com.example.shoestoreproject.databinding.FragmentShoeDetailBinding
 
 
-class ShoeDetail : Fragment() {
+class ShoeDetail  : Fragment() {
     //    private val model: SharedViewModel by activityViewModels()
     private lateinit var viewModel: ShoeListViewModel//by MainViewModel
     private lateinit var binding : FragmentShoeDetailBinding
+    private lateinit var factory : ShoeFactory
+
     //private lateinit var bindingList : FragmentShoeListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //I think we need this factory class since ShoeListViewModel has a parameter and we want shoeList & shoeDetail to observe it
+        val scoreFragmentArgs by navArgs<ShoeListArgs>()
+        factory = ShoeFactory(scoreFragmentArgs.saved)
         // Inflate the layout for this fragment
-        viewModel = ViewModelProvider(this).get(ShoeListViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(),factory).get(ShoeListViewModel::class.java)
         //shoeList //= ""
+
+
 /*
 Create a new Shoe Detail destination that includes:
 
@@ -41,12 +50,22 @@ A Save button with an action to navigate back to the shoe list screen and add a 
             container,
             false
         )
+        binding.cancelButton.setOnClickListener { findNavController(this).navigate(R.id.action_shoeDetail_to_shoeList)
+        }
 
         binding.saveButton.setOnClickListener { view: View? ->
             //viewModel.addCustomView()
             viewModel.setBooleanTrue()
             viewModel.setNum()
+            viewModel.createObject()
+            //viewModel._array.value?.get(0)?._companyName?.value = "test"
 
+            viewModel._array.value?.get(0)?._companyName?.value = binding.companyNameText.toString()
+            /*viewModel._array.observe(viewLifecycleOwner, Observer { myArray ->
+                myArray[0]._companyName.value = binding.companyNameText.toString()
+            })
+
+             */
             //update values in array in viewModel object
             viewModel.num
             val saved = viewModel.saved.value

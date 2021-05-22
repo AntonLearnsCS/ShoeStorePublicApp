@@ -16,7 +16,7 @@ class ShoeListViewModel(saved : Boolean) : ViewModel() {
     private var array : MutableLiveData<MutableList<LiveDataClass>>//MutableList<LiveDataClass>
     val _array : LiveData<MutableList<LiveDataClass>>
     get() = array
-
+    var i = 0
     private lateinit var _companyName : MutableLiveData<String>
 
 
@@ -35,17 +35,29 @@ class ShoeListViewModel(saved : Boolean) : ViewModel() {
         array = MutableLiveData() //Collection<LiveDataClass>
     }
 
-    fun myFun()
-    {
-        array.value?.add(createObject())
-    }
-    fun createObject() : LiveDataClass
+    fun createObject()
     {
         //pass in the information from shoeDetail to here
         var myObject = LiveDataClass()
         myObject._companyName.value
         myObject._shoeName.value
-        return myObject
+        array.value?.add(myObject)
+
+    }
+
+    public class LiveDataClass()
+    {
+        var _companyName = MutableLiveData<String>()
+        val _shoeName = MutableLiveData<String>()
+        val _shoeSize = MutableLiveData<Int>()
+        val _shoeDescription = MutableLiveData<String>()
+     /*
+        fun setCompanyName()
+        {
+            _companyName.value =
+        }
+
+      */
     }
 
     val mutableList : MutableList<LiveDataClass> = ArrayList()
@@ -85,14 +97,4 @@ insertPoint.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL
     }
 
 }
-public class LiveDataClass()
-{
-    val _companyName = MutableLiveData<String>()
-    val _shoeName = MutableLiveData<String>()
-    val _shoeSize = MutableLiveData<Int>()
-    val _shoeDescription = MutableLiveData<String>()
-    fun setCompanyName()
-    {
-        //_companyName.value =
-    }
-}
+

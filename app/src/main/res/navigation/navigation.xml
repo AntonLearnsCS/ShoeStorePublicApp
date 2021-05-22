@@ -50,5 +50,10 @@
         <action
             android:id="@+id/action_shoeDetail_to_shoeList"
             app:destination="@id/shoeList" />
+        <argument
+            android:name="saved"
+            app:argType="boolean"
+            android:defaultValue="false"
+            />
     </fragment>
 </navigation>
