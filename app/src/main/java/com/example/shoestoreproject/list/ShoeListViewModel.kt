@@ -1,6 +1,7 @@
 package com.example.shoestoreproject.list
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
@@ -16,8 +17,9 @@ class ShoeListViewModel(saved : Boolean) : ViewModel() {
     private var array : MutableLiveData<MutableList<LiveDataClass>>//MutableList<LiveDataClass>
     val _array : LiveData<MutableList<LiveDataClass>>
     get() = array
+
+    var testArray : MutableList<LiveDataClass> = mutableListOf()
     var i = 0
-    private lateinit var _companyName : MutableLiveData<String>
 
 
     private val _saved = MutableLiveData<Boolean>()
@@ -42,7 +44,23 @@ class ShoeListViewModel(saved : Boolean) : ViewModel() {
         //myObject._companyName.value
         //myObject._shoeName.value
         //array.value?.add(myObject)
-        _array.value?.add(0,myObject)
+        testArray.add(myObject)
+        //testArray[0]._companyName.value = "companyName"
+        if (testArray[0] != null) {
+            Log.i("array1", testArray.get(0)._companyName.value.toString())
+            if (testArray.get(0)._companyName.value.toString() != null)
+                Log.i("array2","passed")
+        }
+        myObject._companyName.value = "f"
+
+
+
+        array.value?.add(0,myObject)
+        //object is not being added to array
+        if (array.value?.get(0) == null)
+            Log.i("array","viewModelNull")
+
+        Log.i("array", array.value?.get(0)?._companyName?.value.toString())
     }
 
     public class LiveDataClass()

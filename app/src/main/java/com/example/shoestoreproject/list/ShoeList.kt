@@ -101,7 +101,7 @@ class ShoeList : Fragment() {
         super.onResume()
         viewModel._array.observe(viewLifecycleOwner, Observer { myArray ->
             //myArray[0]
-
+        Log.i("arrayTest",viewModel.testArray[0]._companyName.value.toString())
         })}
 
     fun addCustomView()

@@ -22,7 +22,6 @@ class ShoeDetail  : Fragment() {
     private lateinit var viewModel: ShoeListViewModel//by MainViewModel
     private lateinit var binding : FragmentShoeDetailBinding
     private lateinit var factory : ShoeFactory
-
     //private lateinit var bindingList : FragmentShoeListBinding
 
     override fun onCreateView(
@@ -60,8 +59,15 @@ A Save button with an action to navigate back to the shoe list screen and add a 
             viewModel.setNum()
             viewModel.createObject()
             //viewModel._array.value?.get(0)?._companyName?.value = "test"
-            viewModel.sendMessage("testing")
-            viewModel._array.value?.get(0)?._companyName?.value = binding.companyNameText.toString()
+            viewModel.testArray[0]._companyName.value = "otherCompany"
+
+            if (viewModel._array.value?.get(0)?._companyName?.value == null) //= binding.companyNameText.toString()
+                Log.i("array","null value")
+            else
+            {
+                viewModel._array.value?.get(0)?._companyName?.value = binding.companyNameText.toString()
+            }
+            //viewModel._array.value?.set(0, binding.companyNameText.toString())
             /*viewModel._array.observe(viewLifecycleOwner, Observer { myArray ->
                 myArray[0]._companyName.value = binding.companyNameText.toString()
             })
@@ -70,7 +76,7 @@ A Save button with an action to navigate back to the shoe list screen and add a 
             //test to see if _array exists in ShoeDetail //probably something wrong in generating _array in ViewModel
             viewModel._array.observe(viewLifecycleOwner, Observer {  myArray ->
                 //myArray[0]
-                Log.i("array","ShoeDetail" + myArray[0]._companyName.toString())
+                Log.i("array","ShoeDetail" + myArray.get(0)?._companyName.value.toString())
             })
 
             //update values in array in viewModel object
