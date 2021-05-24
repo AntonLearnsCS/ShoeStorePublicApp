@@ -1,22 +1,14 @@
 package com.example.shoestoreproject.list
 
-import android.content.Context
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.navigation.Navigation
-import com.example.shoestoreproject.MainActivity
-import com.example.shoestoreproject.R
 
 class ShoeListViewModel(saved : Boolean) : ViewModel() {
-    private var array : MutableLiveData<MutableList<LiveDataClass>>//MutableList<LiveDataClass>
-    val _array : LiveData<MutableList<LiveDataClass>>
-    get() = array
+    private var _array : MutableLiveData<MutableList<LiveDataClass>>//MutableList<LiveDataClass>
+    val array : LiveData<MutableList<LiveDataClass>>
+    get() = _array
 
     var testArray : MutableList<LiveDataClass> = mutableListOf()
     var i = 0
@@ -34,33 +26,34 @@ class ShoeListViewModel(saved : Boolean) : ViewModel() {
     init {
         _saved.value = saved
         _num.value = 0
-        array = MutableLiveData() //Collection<LiveDataClass>
+        _array = MutableLiveData(mutableListOf<LiveDataClass>())//MutableLiveData() //Collection<LiveDataClass>
     }
 
     fun createObject()
     {
         //pass in the information from shoeDetail to here
         var myObject = LiveDataClass()
+        //Log.i("array0",myObject.toString())
         //myObject._companyName.value
         //myObject._shoeName.value
         //array.value?.add(myObject)
         testArray.add(myObject)
+        myObject._companyName.value = "f"
         //testArray[0]._companyName.value = "companyName"
         if (testArray[0] != null) {
             Log.i("array1", testArray.get(0)._companyName.value.toString())
             if (testArray.get(0)._companyName.value.toString() != null)
                 Log.i("array2","passed")
         }
-        myObject._companyName.value = "f"
 
 
 
-        array.value?.add(0,myObject)
+        _array.value?.add(myObject)
         //object is not being added to array
-        if (array.value?.get(0) == null)
+        if (_array.value?.get(0) == null)
             Log.i("array","viewModelNull")
 
-        Log.i("array", array.value?.get(0)?._companyName?.value.toString())
+        Log.i("array", _array.value?.get(0)?._companyName?.value.toString())
     }
 
     public class LiveDataClass()

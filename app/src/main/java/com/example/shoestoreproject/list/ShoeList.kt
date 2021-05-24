@@ -1,7 +1,5 @@
 package com.example.shoestoreproject.list
 
-import android.app.Activity
-import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -9,27 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.ScrollView
-import android.widget.TextView
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.view.contains
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavArgs
-import androidx.navigation.NavArgument
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.shoestoreproject.MainViewModel
 //import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.example.shoestoreproject.R
 import com.example.shoestoreproject.databinding.FragmentShoeListBinding
-import kotlinx.android.synthetic.main.customview.view.*
-import kotlinx.android.synthetic.main.fragment_shoe_list.*
 import timber.log.Timber
 
 
@@ -76,33 +62,45 @@ class ShoeList : Fragment() {
 
         //observing
         //TODO: _array does not exists within ShoeList
-        viewModel._array.observe(viewLifecycleOwner, Observer {  myArray ->
-            //myArray[0]
-            Log.i("array",myArray[0]._companyName.toString())
-        })
 
-        viewModel.message.observe(viewLifecycleOwner, Observer {
-            Log.i("array", viewModel.message.value.toString())
 
-            Log.i(
-                "array",
-                viewModel._array.value?.get(0)?._companyName.toString()
-            ) // myArray[0]._companyName.toString()
-            // v.companyName_text.append(viewModel._array.value?.get(0)?._companyName?.value)
+        //Log.i("arrayReal", viewModel._array.value?.get(0)?._companyName?.value.toString())
 
-        })
+        if (viewModel.saved.value == true)
+        {
+            viewModel.array.observe(viewLifecycleOwner, Observer { myArray ->
+                //myArray[0]
+                if (myArray[0] != null)
+                    Log.i("arrayReal", myArray[0]._companyName?.value.toString())
+            })
 
+        if (viewModel.testArray[0]._companyName != null)
+        {
+            Log.i("arrayTest2",viewModel.testArray[0]._companyName.value.toString())
+        }}
 
         return binding.root//inflater.inflate(R.layout.fragment_shoe_list, container, false)
 
     }
-
+/*
     override fun onResume() {
         super.onResume()
         viewModel._array.observe(viewLifecycleOwner, Observer { myArray ->
             //myArray[0]
+            if (myArray[0] != null){
+                Log.i("arrayTest0","null")
+            if(myArray[0]._companyName.value != null)
+                Log.i("arrayTest1","companyName exists")
+            }
+
+
         Log.i("arrayTest",viewModel.testArray[0]._companyName.value.toString())
-        })}
+        })
+
+
+    }
+
+ */
 
     fun addCustomView()
     {
