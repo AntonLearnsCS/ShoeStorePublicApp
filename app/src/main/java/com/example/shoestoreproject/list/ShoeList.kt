@@ -50,41 +50,23 @@ class ShoeList : Fragment() {
         val scoreFragmentArgs by navArgs<ShoeListArgs>()
         factory = ShoeFactory(scoreFragmentArgs.saved)
 
-        //val scoreFragmentArgs by navArgs<ShoeListArgs>()
-        //Log.d("ShoeList", "isSaved: ${scoreFragmentArgs.saved}")
+        //Q: LiveData is reverting to its default value..
+        //A: Use requireActivity instead of "this" to ensure that the viewModel is tied to the activity.
         viewModel = ViewModelProvider(requireActivity(),factory).get(ShoeListViewModel::class.java)
 
-        //Q: LiveData is reverting to its default value..
-        //https://blog.mindorks.com/shared-viewmodel-in-android-shared-between-fragments potential solution but requires fragments to be added the
-        //xml file, which may disrupt the NavHostFragment
-        //potentially creating a new viewModel each time we go back to ShoeList
-        //Also, the values of editText are not being saved in the viewModel
-
-        //observing
-        //TODO: _array does not exists within ShoeList
-
-
-        //Log.i("arrayReal", viewModel._array.value?.get(0)?._companyName?.value.toString())
-
-        if (viewModel.saved.value == true)
-        {
-            viewModel.array.observe(viewLifecycleOwner, Observer { myArray ->
-                //myArray[0]
-                if (myArray[0] != null)
-                    Log.i("arrayReal", myArray[0]._companyName?.value.toString())
-            })
-
-        if (viewModel.testArray[0]._companyName != null)
-        {
-            Log.i("arrayTest2",viewModel.testArray[0]._companyName.value.toString())
-        }}
+        (0 until viewModel.counter.value!!).forEach(
+            addCustomView()
+        )
 
         return binding.root//inflater.inflate(R.layout.fragment_shoe_list, container, false)
 
     }
-/*
+
     override fun onResume() {
         super.onResume()
+        if(viewModel.saved.value == true)
+        Log.i("arrayResume", viewModel?.array?.value?.get(0)?._companyName?.value.toString())
+        /*
         viewModel._array.observe(viewLifecycleOwner, Observer { myArray ->
             //myArray[0]
             if (myArray[0] != null){
@@ -97,10 +79,12 @@ class ShoeList : Fragment() {
         Log.i("arrayTest",viewModel.testArray[0]._companyName.value.toString())
         })
 
+         */
+
 
     }
 
- */
+
 
     fun addCustomView()
     {
@@ -123,6 +107,7 @@ class ShoeList : Fragment() {
     }
 
     //issue of views not saving
+    /*
     override fun onStart() {
         super.onStart()
         Timber.i("OnStart called")
@@ -134,6 +119,8 @@ class ShoeList : Fragment() {
             }
         })
     }
+
+     */
 
     override fun onDestroyView() {
         super.onDestroyView()

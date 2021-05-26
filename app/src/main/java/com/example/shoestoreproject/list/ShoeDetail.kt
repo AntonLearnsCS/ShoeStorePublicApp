@@ -56,16 +56,22 @@ A Save button with an action to navigate back to the shoe list screen and add a 
             viewModel.setBooleanTrue()
             viewModel.setNum()
             viewModel.createObject()
+            viewModel.assignCompanyName(binding.companyNameText.text.toString())
+            viewModel.assignShoeDescription(binding.descriptionText.text.toString())
+            viewModel.assignShoeName(binding.shoeNameText.text.toString())
+            viewModel.assignShoeSize(binding.shoeSizeText.text.toString())
+
+
             //viewModel._array.value?.get(0)?._companyName?.value = "test"
-            viewModel.testArray[0]._companyName.value = "otherCompany"
+            //viewModel.testArray[0]._companyName.value = "otherCompany"
 
-            viewModel.array.value?.get(0)?._companyName?.value = "sears"//binding.companyNameText.toString()
+            //viewModel.array.value?.get(0)?._companyName?.value = "sears"//binding.companyNameText.toString()
 
-            if (viewModel.array.value?.get(0)?._companyName?.value == null) //= binding.companyNameText.toString()
-                Log.i("array","null value")
+            if (viewModel.array.value?.get(0)?._companyName?.value != null) //= binding.companyNameText.toString()
+                Log.i("array", viewModel.array.value!![0]._companyName.value.toString())
             else
             {
-                viewModel.array.value?.get(0)?._companyName?.value = "sears"//binding.companyNameText.toString()
+                viewModel.array.value?.get(0)?._companyName?.value = binding.companyNameText.toString()
             }
             //viewModel._array.value?.set(0, binding.companyNameText.toString())
             /*viewModel._array.observe(viewLifecycleOwner, Observer { myArray ->
@@ -74,13 +80,16 @@ A Save button with an action to navigate back to the shoe list screen and add a 
 
              */
             //test to see if _array exists in ShoeDetail //probably something wrong in generating _array in ViewModel
+            /*
             viewModel.array.observe(viewLifecycleOwner, Observer { myArray ->
                 //myArray[0]
                 Log.i("array","ShoeDetail" + myArray.get(0)?._companyName.value.toString())
             })
 
+             */
+
             //update values in array in viewModel object
-            viewModel.num
+            //viewModel.num
             val saved = viewModel.saved.value
 
 
@@ -88,7 +97,6 @@ A Save button with an action to navigate back to the shoe list screen and add a 
             val action = ShoeDetailDirections.actionShoeDetailToShoeList(saved ?: false)
             //view.findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
             findNavController(this).navigate(action)
-            //viewModel.setBooleanFalse()
         }
         /*
           val currentScore = viewModel.score.value ?: 0

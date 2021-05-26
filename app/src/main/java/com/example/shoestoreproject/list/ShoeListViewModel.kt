@@ -6,12 +6,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class ShoeListViewModel(saved : Boolean) : ViewModel() {
+    var tempVar = LiveDataClass()
+
     private var _array : MutableLiveData<MutableList<LiveDataClass>>//MutableList<LiveDataClass>
     val array : LiveData<MutableList<LiveDataClass>>
     get() = _array
 
+
     var testArray : MutableList<LiveDataClass> = mutableListOf()
-    var i = 0
+
+    private val _counter : MutableLiveData<Int> = MutableLiveData()
+    val counter : LiveData<Int>
+    get() = _counter
 
 
     private val _saved = MutableLiveData<Boolean>()
@@ -27,48 +33,45 @@ class ShoeListViewModel(saved : Boolean) : ViewModel() {
         _saved.value = saved
         _num.value = 0
         _array = MutableLiveData(mutableListOf<LiveDataClass>())//MutableLiveData() //Collection<LiveDataClass>
+        _counter.value = 0
     }
 
     fun createObject()
     {
         //pass in the information from shoeDetail to here
         var myObject = LiveDataClass()
-        //Log.i("array0",myObject.toString())
-        //myObject._companyName.value
-        //myObject._shoeName.value
-        //array.value?.add(myObject)
-        testArray.add(myObject)
-        myObject._companyName.value = "f"
-        //testArray[0]._companyName.value = "companyName"
-        if (testArray[0] != null) {
-            Log.i("array1", testArray.get(0)._companyName.value.toString())
-            if (testArray.get(0)._companyName.value.toString() != null)
-                Log.i("array2","passed")
-        }
-
+        tempVar = myObject
 
 
         _array.value?.add(myObject)
-        //object is not being added to array
-        if (_array.value?.get(0) == null)
-            Log.i("array","viewModelNull")
 
-        Log.i("array", _array.value?.get(0)?._companyName?.value.toString())
+        counter.value?.plus(1)
+
     }
 
     public class LiveDataClass()
     {
         var _companyName = MutableLiveData<String>()
         val _shoeName = MutableLiveData<String>()
-        val _shoeSize = MutableLiveData<Int>()
+        val _shoeSize = MutableLiveData<String>()
         val _shoeDescription = MutableLiveData<String>()
-     /*
-        fun setCompanyName()
-        {
-            _companyName.value =
-        }
+    }
 
-      */
+    fun assignCompanyName(name : String)
+    {
+        tempVar._companyName.value = name
+    }
+    fun assignShoeName(name : String)
+    {
+        tempVar._shoeName.value = name
+    }
+    fun assignShoeSize(size : String)
+    {
+        tempVar._shoeSize.value = size
+    }
+    fun assignShoeDescription(name : String)
+    {
+        tempVar._shoeDescription.value = name
     }
 
     val mutableList : MutableList<LiveDataClass> = ArrayList()
