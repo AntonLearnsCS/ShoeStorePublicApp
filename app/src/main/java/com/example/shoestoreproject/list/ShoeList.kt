@@ -1,5 +1,7 @@
 package com.example.shoestoreproject.list
 
+//import androidx.test.core.app.ApplicationProvider.getApplicationContext
+
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -7,15 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
-//import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import com.example.shoestoreproject.R
 import com.example.shoestoreproject.databinding.FragmentShoeListBinding
+import kotlinx.android.synthetic.main.customview.view.*
 import timber.log.Timber
 
 
@@ -53,10 +55,11 @@ class ShoeList : Fragment() {
         //Q: LiveData is reverting to its default value..
         //A: Use requireActivity instead of "this" to ensure that the viewModel is tied to the activity.
         viewModel = ViewModelProvider(requireActivity(),factory).get(ShoeListViewModel::class.java)
-
-        (0 until viewModel.counter.value!!).forEach(
-            addCustomView()
-        )
+        if (viewModel.array.value?.get(0) ?: null != null) {
+            (0 until viewModel.counter.value!!).forEach(
+                addCustomView()
+            )
+        }
 
         return binding.root//inflater.inflate(R.layout.fragment_shoe_list, container, false)
 
@@ -64,30 +67,14 @@ class ShoeList : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        addCustomView()
         if(viewModel.saved.value == true)
         Log.i("arrayResume", viewModel?.array?.value?.get(0)?._companyName?.value.toString())
-        /*
-        viewModel._array.observe(viewLifecycleOwner, Observer { myArray ->
-            //myArray[0]
-            if (myArray[0] != null){
-                Log.i("arrayTest0","null")
-            if(myArray[0]._companyName.value != null)
-                Log.i("arrayTest1","companyName exists")
-            }
-
-
-        Log.i("arrayTest",viewModel.testArray[0]._companyName.value.toString())
-        })
-
-         */
-
-
     }
 
 
 
-    fun addCustomView()
-    {
+    fun addCustomView(): (Any) -> Unit {
         //https://stackoverflow.com/questions/6216547/android-dynamically-add-views-into-view
         val vi : LayoutInflater = this.context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         v = vi.inflate(R.layout.customview, null)
@@ -102,8 +89,22 @@ class ShoeList : Fragment() {
             )
         )
         v.setTag(i)
+        val textView = v.findViewById<View>(R.id.companyName_text) as TextView//findViewById<View>(R.id.a_text_view) as TextView
+        textView.companyName_text.setText( viewModel.array.value?.get(0)?._companyName?.value.toString())
+        v.companyName_text.text
         i++
         myLayout.addView(v)
+
+        printHello("dd")
+        //(Any) -> Unit; requires an expression
+        return { print("")}
+    }
+    fun printHello(name : String?) : Unit {
+        if (name != null)
+            print("Hello, $name!")
+        else
+            print("Hi there!")
+        // We don't need to write 'return Unit.VALUE' or 'return', although we could
     }
 
     //issue of views not saving
