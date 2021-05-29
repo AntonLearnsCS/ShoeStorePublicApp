@@ -48,9 +48,17 @@ class ShoeList : Fragment() {
             container,
             false
         )
+
+        bindingCustom = DataBindingUtil.inflate(
+            inflater,
+            R.layout.custom_detail,
+            container,
+            false
+        )
         // Set the viewmodel for databinding - this allows the bound layout access to all of the
         // data in the VieWModel
         bindingCustom.shoeListCustom = this
+        //bindingCustom.button.setOnClickListener { returnToDetail() }
         Timber.plant(Timber.DebugTree())
         //TODO: Figure out why onCreate and onDestroyView are called twice after navigating from Shoedetail
         Timber.i("onCreateCalled")
@@ -88,6 +96,7 @@ class ShoeList : Fragment() {
 
         Log.i("arrayNavigationHeight", this.binding.linearLayoutId.get(0).id.toString())
         //this.binding.linearLayoutId.get(0)//.findViewById<View>(binding.linearLayoutId[0])
+        //return bindingCustom.root
         return binding.root//inflater.inflate(R.layout.fragment_shoe_list, container, false)
     }
 
@@ -110,6 +119,7 @@ class ShoeList : Fragment() {
         v.setTag(i)
         //Q: How to add a viewGroup so that I wont have to create a variable for each textView in the customView layout
         val textViewCompanyName = v.findViewById<View>(R.id.companyName_text) as EditText//findViewById<View>(R.id.a_text_view) as TextView
+        //note: "companyName_text" is synthetic
         textViewCompanyName.companyName_text.setText( viewModel.array.value?.get(index)?._companyName?.value.toString())
 
         val textViewShoeName = v.findViewById<View>(R.id.shoeName_text) as EditText
@@ -131,9 +141,8 @@ class ShoeList : Fragment() {
         //(Any) -> Unit; requires an expression
         return { print("")}
     }
-    fun returnToDetail(view : View)
+    fun returnToDetail()
     {
-
         viewModel.setReturnTrue()
         findNavController().navigate(R.id.action_shoeList_to_shoeDetail)
     }
