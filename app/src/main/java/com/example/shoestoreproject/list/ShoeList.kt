@@ -18,6 +18,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.shoestoreproject.R
+import com.example.shoestoreproject.databinding.CustomDetailBinding
 //import com.example.shoestoreproject.databinding.CustomviewBinding
 import com.example.shoestoreproject.databinding.FragmentShoeListBinding
 import kotlinx.android.synthetic.main.custom_detail.view.*
@@ -27,7 +28,7 @@ import timber.log.Timber
 class ShoeList : Fragment() {
     private lateinit var viewModel : ShoeListViewModel
     private lateinit var binding : FragmentShoeListBinding
-    //private lateinit var bindingCustom : CustomviewBinding
+    private lateinit var bindingCustom : CustomDetailBinding
 
     private lateinit var factory : ShoeFactory
     var i = 0
@@ -47,6 +48,9 @@ class ShoeList : Fragment() {
             container,
             false
         )
+        // Set the viewmodel for databinding - this allows the bound layout access to all of the
+        // data in the VieWModel
+        bindingCustom.shoeListCustom = this
         Timber.plant(Timber.DebugTree())
         //TODO: Figure out why onCreate and onDestroyView are called twice after navigating from Shoedetail
         Timber.i("onCreateCalled")

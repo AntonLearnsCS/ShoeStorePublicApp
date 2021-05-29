@@ -26,7 +26,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Button"
-            android:onClick="@{() -> shoeViewModel  }"
+            android:onClick="@{() -> shoeListCustom.returnToDetail()  }"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
