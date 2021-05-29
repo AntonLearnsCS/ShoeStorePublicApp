@@ -14,7 +14,7 @@
          >
 
         <LinearLayout
-            android:id="@+id/layout_id"
+            android:id="@+id/linearLayout_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"

@@ -26,14 +26,12 @@ class ShoeDetail  : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //I think we need this factory class since ShoeListViewModel has a parameter and we want shoeList & shoeDetail to observe it
+        //I think we need this factory class since ShoeListViewModel has a parameter and we want shoeList & custom_detail to observe it
         val scoreFragmentArgs by navArgs<ShoeListArgs>()
         factory = ShoeFactory(scoreFragmentArgs.saved)
         // Inflate the layout for this fragment
         viewModel = ViewModelProvider(requireActivity(),factory).get(ShoeListViewModel::class.java)
         //shoeList //= ""
-
-
 /*
 Create a new Shoe Detail destination that includes:
 
@@ -54,7 +52,6 @@ A Save button with an action to navigate back to the shoe list screen and add a 
         binding.saveButton.setOnClickListener { view: View? ->
             //viewModel.addCustomView()
             viewModel.setBooleanTrue()
-            viewModel.setNum()
             viewModel.createObject()
             viewModel.assignCompanyName(binding.companyNameText.text.toString())
             viewModel.assignShoeDescription(binding.descriptionText.text.toString())
@@ -73,20 +70,6 @@ A Save button with an action to navigate back to the shoe list screen and add a 
             {
                 viewModel.array.value?.get(0)?._companyName?.value = binding.companyNameText.toString()
             }
-            //viewModel._array.value?.set(0, binding.companyNameText.toString())
-            /*viewModel._array.observe(viewLifecycleOwner, Observer { myArray ->
-                myArray[0]._companyName.value = binding.companyNameText.toString()
-            })
-
-             */
-            //test to see if _array exists in ShoeDetail //probably something wrong in generating _array in ViewModel
-            /*
-            viewModel.array.observe(viewLifecycleOwner, Observer { myArray ->
-                //myArray[0]
-                Log.i("array","ShoeDetail" + myArray.get(0)?._companyName.value.toString())
-            })
-
-             */
 
             //update values in array in viewModel object
             //viewModel.num
@@ -98,6 +81,8 @@ A Save button with an action to navigate back to the shoe list screen and add a 
             //view.findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
             findNavController(this).navigate(action)
         }
+
+
         /*
           val currentScore = viewModel.score.value ?: 0
                 val action = GameFragmentDirections.actionGameToScore(currentScore)

@@ -12,49 +12,49 @@ class ShoeListViewModel(saved : Boolean) : ViewModel() {
     val array : LiveData<MutableList<LiveDataClass>>
     get() = _array
 
-
-    var testArray : MutableList<LiveDataClass> = mutableListOf()
-
     private val _counter : MutableLiveData<Int> = MutableLiveData()
     val counter : LiveData<Int>
     get() = _counter
 
+    private var _returning : MutableLiveData<Boolean> = MutableLiveData()//MutableList<LiveDataClass>
+    val returning : LiveData<Boolean>
+        get() = _returning
 
     private val _saved = MutableLiveData<Boolean>()
     val saved : LiveData<Boolean>
     get() = _saved
 
-    private val _num = MutableLiveData<Int>()
-    val num : LiveData<Int>
-    get() = _num
     //Q: Why can't you reference the mutableList object "array" outside of a method?
 
     init {
         _saved.value = saved
-        _num.value = 0
         _array = MutableLiveData(mutableListOf<LiveDataClass>())//MutableLiveData() //Collection<LiveDataClass>
         _counter.value = 0
+        _returning.value = false
     }
-
+    fun setReturnTrue()
+    {
+        _returning.value = true
+    }
     fun createObject()
     {
-        //pass in the information from shoeDetail to here
+        //pass in the information from custom_detail to here
         var myObject = LiveDataClass()
         tempVar = myObject
 
 
         _array.value?.add(myObject)
 
-        counter.value?.plus(1)
-
+        _counter.value = _counter.value?.plus(1)
     }
 
     public class LiveDataClass()
     {
         var _companyName = MutableLiveData<String>()
-        val _shoeName = MutableLiveData<String>()
-        val _shoeSize = MutableLiveData<String>()
-        val _shoeDescription = MutableLiveData<String>()
+        var _shoeName = MutableLiveData<String>()
+        var _shoeSize = MutableLiveData<String>()
+        var _shoeDescription = MutableLiveData<String>()
+
     }
 
     fun assignCompanyName(name : String)
@@ -101,10 +101,7 @@ insertPoint.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL
          */
 
     }
-    fun setNum()
-    {
-        _num.value = 1
-    }
+
     fun setBooleanTrue()
     {
         _saved.value = true

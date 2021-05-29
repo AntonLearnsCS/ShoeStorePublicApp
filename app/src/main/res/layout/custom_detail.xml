@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="shoeViewModel"
+            type="com.example.shoestoreproject.list.ShoeListViewModel" />
+        <variable
+            name="shoeListCustom"
+            type="com.example.shoestoreproject.list.ShoeList" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="88dp"
+            android:layout_height="84dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Button"
+            android:onClick="@{() -> shoeViewModel  }"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/shoeName_text"
+            android:layout_width="@dimen/width"
+            android:layout_height="@dimen/height"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            app:layout_constraintBottom_toTopOf="@+id/description_text"
+            app:layout_constraintStart_toEndOf="@+id/companyName_text"
+            app:layout_constraintTop_toTopOf="@+id/button"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <EditText
+            android:id="@+id/description_text"
+            android:layout_width="@dimen/width"
+            android:layout_height="@dimen/height"
+            android:layout_marginStart="5dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            app:layout_constraintBottom_toBottomOf="@+id/button"
+            app:layout_constraintStart_toEndOf="@+id/shoeSize_text"
+            app:layout_constraintTop_toBottomOf="@+id/shoeName_text" />
+
+        <EditText
+            android:id="@+id/shoeSize_text"
+            android:layout_width="@dimen/width"
+            android:layout_height="@dimen/height"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            app:layout_constraintBottom_toBottomOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="@+id/companyName_text"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/companyName_text"
+            app:layout_constraintTop_toBottomOf="@+id/companyName_text" />
+
+        <EditText
+            android:id="@+id/companyName_text"
+            android:layout_width="@dimen/width"
+            android:layout_height="@dimen/height"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            app:layout_constraintBottom_toTopOf="@+id/shoeSize_text"
+            app:layout_constraintStart_toEndOf="@+id/button"
+            app:layout_constraintTop_toTopOf="@+id/button"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
