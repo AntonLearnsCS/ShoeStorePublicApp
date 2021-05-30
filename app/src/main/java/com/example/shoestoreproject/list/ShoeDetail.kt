@@ -26,6 +26,11 @@ class ShoeDetail  : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        if (viewModel.returning.value == true)
+        {
+
+        }
         //I think we need this factory class since ShoeListViewModel has a parameter and we want shoeList & custom_detail to observe it
         val scoreFragmentArgs by navArgs<ShoeListArgs>()
         factory = ShoeFactory(scoreFragmentArgs.saved)
@@ -48,8 +53,15 @@ A Save button with an action to navigate back to the shoe list screen and add a 
         )
         binding.cancelButton.setOnClickListener { findNavController(this).navigate(R.id.action_shoeDetail_to_shoeList)
         }
+        if (viewModel.returning.value == true)
+        {
+            //is saying that set the current
+           binding.companyNameText.text = (viewModel.array.value?.get(viewModel.id.value)?)._companyName.value.toString()
+               //viewModel.id.value?.let { it1 -> viewModel.array.value?.get(it1) }
+        }
 
-        binding.saveButton.setOnClickListener { view: View? ->
+        binding.saveButton.setOnClickListener {
+
             //viewModel.addCustomView()
             viewModel.setBooleanTrue()
             viewModel.createObject()

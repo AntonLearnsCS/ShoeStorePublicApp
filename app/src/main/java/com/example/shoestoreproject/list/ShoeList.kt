@@ -28,6 +28,8 @@ import timber.log.Timber
 class ShoeList : Fragment() {
     private lateinit var viewModel : ShoeListViewModel
     private lateinit var binding : FragmentShoeListBinding
+
+    //Q: bindingCustomm is not triggering the returnDetail function
     private lateinit var bindingCustom : CustomDetailBinding
 
     private lateinit var factory : ShoeFactory
@@ -64,7 +66,7 @@ class ShoeList : Fragment() {
         Timber.i("onCreateCalled")
         binding.FABButton.setOnClickListener {view: View? ->  view?.findNavController()?.navigate(R.id.action_shoeList_to_shoeDetail) }
 
-        binding.testButton.setOnClickListener { view: View? -> addCustomView(0) }
+        binding.testButton.setOnClickListener { addCustomView(0) }
         //TODO: Q: Why is the ShoeListArgs object not being generated?
         //A: Build -> Clean Project followed by Build -> Rebuild project seems to work
         val scoreFragmentArgs by navArgs<ShoeListArgs>()
@@ -114,7 +116,7 @@ class ShoeList : Fragment() {
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
         )
-        v.id = i
+        //v.id = i
         //allows views to have memory
         v.setTag(i)
         //Q: How to add a viewGroup so that I wont have to create a variable for each textView in the customView layout
@@ -131,6 +133,12 @@ class ShoeList : Fragment() {
         val textViewShoeDescription = v.findViewById<View>(R.id.description_text) as EditText
         textViewShoeDescription.description_text.setText(viewModel.array.value?.get(index)?._shoeDescription?.value.toString())
 
+        v.button.setOnClickListener {
+
+            viewModel.setReturnTrue()
+            viewModel.setId(v.id)
+            findNavController().navigate(R.id.action_shoeList_to_shoeDetail)
+        }
         i++
         myLayout.addView(v)
 
@@ -143,6 +151,7 @@ class ShoeList : Fragment() {
     }
     fun returnToDetail()
     {
+        println("Testing")
         viewModel.setReturnTrue()
         findNavController().navigate(R.id.action_shoeList_to_shoeDetail)
     }

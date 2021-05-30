@@ -20,6 +20,10 @@ class ShoeListViewModel(saved : Boolean) : ViewModel() {
     val returning : LiveData<Boolean>
         get() = _returning
 
+    private var _id : MutableLiveData<Int> = MutableLiveData()//MutableList<LiveDataClass>
+    val id : LiveData<Int>
+        get() = _id
+
     private val _saved = MutableLiveData<Boolean>()
     val saved : LiveData<Boolean>
     get() = _saved
@@ -106,9 +110,9 @@ insertPoint.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL
     {
         _saved.value = true
     }
-    fun setBooleanFalse()
+    fun setId(value : Int)
     {
-        _saved.value = false
+        _id.value = value
     }
 
 }

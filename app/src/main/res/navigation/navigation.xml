@@ -51,7 +51,7 @@
             android:id="@+id/action_shoeDetail_to_shoeList"
             app:destination="@id/shoeList" />
         <argument
-            android:name="saved"
+            android:name="returning"
             app:argType="boolean"
             android:defaultValue="false"
             />
