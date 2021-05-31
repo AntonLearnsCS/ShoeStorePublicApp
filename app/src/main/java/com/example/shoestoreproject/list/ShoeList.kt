@@ -5,13 +5,9 @@ package com.example.shoestoreproject.list
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
+import android.view.*
 import android.widget.EditText
 import android.widget.LinearLayout
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -19,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.ui.NavigationUI
 import com.example.shoestoreproject.R
 import com.example.shoestoreproject.databinding.CustomDetailBinding
 //import com.example.shoestoreproject.databinding.CustomviewBinding
@@ -104,6 +101,10 @@ class ShoeList : Fragment() {
         Log.i("arrayNavigationHeight", this.binding.linearLayoutId.get(0).id.toString())
         //this.binding.linearLayoutId.get(0)//.findViewById<View>(binding.linearLayoutId[0])
         //return bindingCustom.root
+
+        //lets compiler know that the fragment has an options menu
+        setHasOptionsMenu(true)
+
         return binding.root//inflater.inflate(R.layout.fragment_shoe_list, container, false)
     }
 
@@ -167,6 +168,18 @@ class ShoeList : Fragment() {
         //(Any) -> Unit; requires an expression
         return { print("")}
     }
+    //inflates options menu
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.logout_menu, menu)
+    }
+
+    //navigates to the id set on the item of the options menu
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
+                || super.onOptionsItemSelected(item)
+    }
+
     fun returnToDetail()
     {
         println("Testing")
