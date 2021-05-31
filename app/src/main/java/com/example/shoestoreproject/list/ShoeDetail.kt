@@ -27,10 +27,6 @@ class ShoeDetail  : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        if (viewModel.returning.value == true)
-        {
-
-        }
         //I think we need this factory class since ShoeListViewModel has a parameter and we want shoeList & custom_detail to observe it
         val scoreFragmentArgs by navArgs<ShoeListArgs>()
         factory = ShoeFactory(scoreFragmentArgs.saved)
@@ -55,12 +51,34 @@ A Save button with an action to navigate back to the shoe list screen and add a 
         }
         if (viewModel.returning.value == true)
         {
-            //is saying that set the current
-           binding.companyNameText.text = (viewModel.array.value?.get(viewModel.id.value)?)._companyName.value.toString()
+            //Sets the shoeDetail to the previously inputted strings
+            //Use setText(String), since editText.text expects an Editable, not a String.
+            binding.companyNameText.setText(viewModel.array.value?.get(viewModel.id.value!!)?._companyName?.value.toString())
+            binding.shoeNameText.setText(viewModel.array.value?.get(viewModel.id.value!!)?._shoeName?.value.toString())
+            binding.shoeSizeText.setText(viewModel.array.value?.get(viewModel.id.value!!)?._shoeSize?.value.toString())
+            binding.descriptionText.setText(viewModel.array.value?.get(viewModel.id.value!!)?._shoeDescription?.value.toString())
+
+            //binding.companyNameText.text = (viewModel.array.value?.get(viewModel.id.value)?)._companyName.value.toString()
                //viewModel.id.value?.let { it1 -> viewModel.array.value?.get(it1) }
         }
 
         binding.saveButton.setOnClickListener {
+            val saved = viewModel.saved.value
+
+            if (viewModel.returning.value == true)
+            {
+                viewModel.array.value?.get(viewModel.id.value!!)?._companyName?.value = binding.companyNameText.text.toString()
+                viewModel.array.value?.get(viewModel.id.value!!)?._shoeName?.value = binding.shoeNameText.text.toString()
+                viewModel.array.value?.get(viewModel.id.value!!)?._shoeSize?.value = binding.shoeSizeText.text.toString()
+                viewModel.array.value?.get(viewModel.id.value!!)?._shoeDescription?.value = binding.descriptionText.text.toString()
+
+                viewModel.setBooleanTrue()
+                val action = ShoeDetailDirections.actionShoeDetailToShoeList(saved ?: false)
+                //view.findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
+                findNavController(this).navigate(action)
+            }
+            else
+            {
 
             //viewModel.addCustomView()
             viewModel.setBooleanTrue()
@@ -85,13 +103,14 @@ A Save button with an action to navigate back to the shoe list screen and add a 
 
             //update values in array in viewModel object
             //viewModel.num
-            val saved = viewModel.saved.value
+
 
 
             //TODO: Unsure why "ShoeDetailDirections" became invalid..
             val action = ShoeDetailDirections.actionShoeDetailToShoeList(saved ?: false)
             //view.findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
             findNavController(this).navigate(action)
+        }
         }
 
 
@@ -112,5 +131,4 @@ A Save button with an action to navigate back to the shoe list screen and add a 
         //A: It would appear not, as we R.layout only gives us access to the xml file name but not the viewGroups within
         //The StackOverflow forums are implying that you must reference the viewGroup within the fragment the viewGroup is attached to.
     }
-
 }

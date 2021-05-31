@@ -8,8 +8,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -75,6 +77,9 @@ class ShoeList : Fragment() {
         //Q: LiveData is reverting to its default value..
         //A: Use requireActivity instead of "this" to ensure that the viewModel is tied to the activity.
         viewModel = ViewModelProvider(requireActivity(),factory).get(ShoeListViewModel::class.java)
+
+        viewModel.setReturnFalse()
+
         if (!viewModel.array.value.isNullOrEmpty()) {
 
             viewModel.array.value!!.forEachIndexed{ index, element ->
@@ -116,7 +121,7 @@ class ShoeList : Fragment() {
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
         )
-        //v.id = i
+        v.id = i
         //allows views to have memory
         v.setTag(i)
         //Q: How to add a viewGroup so that I wont have to create a variable for each textView in the customView layout
@@ -133,12 +138,25 @@ class ShoeList : Fragment() {
         val textViewShoeDescription = v.findViewById<View>(R.id.description_text) as EditText
         textViewShoeDescription.description_text.setText(viewModel.array.value?.get(index)?._shoeDescription?.value.toString())
 
-        v.button.setOnClickListener {
-
+        v.button.setOnClickListener()
+        {
             viewModel.setReturnTrue()
             viewModel.setId(v.id)
             findNavController().navigate(R.id.action_shoeList_to_shoeDetail)
         }
+        //v.visibility = View.GONE
+        //v.setFocusable(false)
+        v.companyName_text.isFocusable = false
+        v.shoeName_text.isFocusable = false
+        v.shoeSize_text.isFocusable = false
+        v.description_text.isFocusable = false
+
+
+        //v.clearFocus()
+
+       // val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        //imm.hideSoftInputFromWindow(view?.windowToken, 0)
+        //v.companyName_text.setOnFocusChangeListener(v,false) //focusable(false)
         i++
         myLayout.addView(v)
 
@@ -177,6 +195,7 @@ class ShoeList : Fragment() {
         super.onDestroyView()
         Timber.i("onDestroyView called")
     }
+
 
 
 }

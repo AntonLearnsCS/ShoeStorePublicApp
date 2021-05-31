@@ -40,6 +40,10 @@ class ShoeListViewModel(saved : Boolean) : ViewModel() {
     {
         _returning.value = true
     }
+    fun setReturnFalse()
+    {
+        _returning.value = false
+    }
     fun createObject()
     {
         //pass in the information from custom_detail to here

@@ -47,7 +47,7 @@ Shoe/Item Detail screen for adding a new shoe/item
             false
         )
         binding.nextButton.setOnClickListener { view : View ->
-            if (view != null)
+
             view.findNavController().navigate(R.id.action_welcome_to_instructions) }
         return binding.root
         //return inflater.inflate(R.layout.fragment_welcome, container, false)
