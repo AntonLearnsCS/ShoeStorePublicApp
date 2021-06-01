@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     }
     fun getForegroundFragment() : Fragment
     {
-        var navHostFragment : Fragment? = getSupportFragmentManagger().findFragmentById(R.id.myNavHostFragment)
+        var navHostFragment : Fragment? = getSupportFragmentManager().findFragmentById(R.id.myNavHostFragment)
         return  navHostFragment?.getChildFragmentManager()?.getFragments()?.get(0)!!
     }
 //navHostFragment!! //== null ? null :
