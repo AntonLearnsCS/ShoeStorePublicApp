@@ -49,6 +49,7 @@ A Save button with an action to navigate back to the shoe list screen and add a 
         )
         binding.cancelButton.setOnClickListener { findNavController(this).navigate(R.id.action_shoeDetail_to_shoeList)
         }
+        //pass in the id of the selected view
         if (viewModel.returning.value == true)
         {
             //Sets the shoeDetail to the previously inputted strings
