@@ -19,7 +19,9 @@
         tools:layout="@layout/fragment_welcome" >
         <action
             android:id="@+id/action_welcome_to_instructions"
-            app:destination="@id/instructions" />
+            app:destination="@id/instructions"
+            app:popUpTo="@id/welcome"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/shoeList"
@@ -56,9 +58,4 @@
             android:defaultValue="false"
             />
     </fragment>
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.shoestoreproject.loginFragment"
-        android:label="fragment_login2"
-        tools:layout="@layout/fragment_login2" />
 </navigation>

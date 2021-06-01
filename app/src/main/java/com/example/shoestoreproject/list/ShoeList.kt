@@ -11,6 +11,7 @@ import android.widget.LinearLayout
 import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -65,7 +66,7 @@ class ShoeList : Fragment() {
         Timber.i("onCreateCalled")
         binding.FABButton.setOnClickListener {view: View? ->  view?.findNavController()?.navigate(R.id.action_shoeList_to_shoeDetail) }
 
-        binding.testButton.setOnClickListener { addCustomView(0) }
+        //binding.testButton.setOnClickListener { addCustomView(0) }
         //TODO: Q: Why is the ShoeListArgs object not being generated?
         //A: Build -> Clean Project followed by Build -> Rebuild project seems to work
         val scoreFragmentArgs by navArgs<ShoeListArgs>()
@@ -77,18 +78,15 @@ class ShoeList : Fragment() {
 
         viewModel.setReturnFalse()
 
-        if (!viewModel.array.value.isNullOrEmpty()) {
-
-            viewModel.array.value!!.forEachIndexed{ index, element ->
-                addCustomView(index)
+        viewModel.array.observe(viewLifecycleOwner, Observer { array ->
+            if (!array.isEmpty()){
+                viewModel.array.value!!.forEachIndexed{ index, element ->
+                    Log.i("arrayID1:",index.toString())
+                    addCustomView(index)
+                }
             }
-            /*
-            (0 until viewModel.counter.value!!).forEach(
-                addCustomView()
-            )
+        })
 
-             */
-        }
         //Q: Will this refer to the button on the customView? A: Returns null object so far
         /*
         if (viewModel.saved.value == true){
@@ -122,9 +120,6 @@ class ShoeList : Fragment() {
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
         )
-        v.id = i
-        //allows views to have memory
-        v.setTag(i)
         //Q: How to add a viewGroup so that I wont have to create a variable for each textView in the customView layout
         val textViewCompanyName = v.findViewById<View>(R.id.companyName_text) as EditText//findViewById<View>(R.id.a_text_view) as TextView
         //note: "companyName_text" is synthetic
@@ -142,7 +137,8 @@ class ShoeList : Fragment() {
         v.button.setOnClickListener()
         {
             viewModel.setReturnTrue()
-            viewModel.setId(v.id)
+            //Log.i("arrayID: ", v.id.toString())
+            viewModel.setId(index)
             findNavController().navigate(R.id.action_shoeList_to_shoeDetail)
         }
         //v.visibility = View.GONE
@@ -186,24 +182,6 @@ class ShoeList : Fragment() {
         viewModel.setReturnTrue()
         findNavController().navigate(R.id.action_shoeList_to_shoeDetail)
     }
-
-
-    //issue of views not saving
-    /*
-    override fun onStart() {
-        super.onStart()
-        Timber.i("OnStart called")
-        viewModel.saved.observe(viewLifecycleOwner, Observer { saved ->
-            if (saved)
-            {
-                addCustomView()
-                viewModel.setBooleanFalse()
-            }
-        })
-    }
-
-     */
-
     override fun onDestroyView() {
         super.onDestroyView()
         Timber.i("onDestroyView called")

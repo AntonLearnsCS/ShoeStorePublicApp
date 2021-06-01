@@ -45,7 +45,10 @@ class LoginStart : Fragment() {
             //pass in email text from editText to viewModel
             viewModel.setEmail(binding.emailAddressText.text.toString())
             viewModel.setPassword(binding.passwordText.text.toString())
-            if (view != null && viewModel.checkOldEmail()) {
+            if (binding.emailAddressText.text.isEmpty() || binding.passwordText.text.isEmpty()){
+                Toast.makeText(this.context,"Missing log-in information", Toast.LENGTH_SHORT).show()
+            }
+            else if (view != null && viewModel.checkOldEmail()) {
                 view.findNavController().navigate(R.id.action_login_to_welcome)
             }
             else
@@ -56,7 +59,10 @@ class LoginStart : Fragment() {
         binding.newUserButton.setOnClickListener { view: View ->
             viewModel.setEmail(binding.emailAddressText.text.toString())
             viewModel.setPassword(binding.passwordText.text.toString())
-            if (viewModel.checkNewEmail())
+            if (binding.emailAddressText.text.isEmpty() || binding.passwordText.text.isEmpty()){
+                Toast.makeText(this.context,"Missing log-in information", Toast.LENGTH_SHORT).show()
+            }
+            else if (viewModel.checkNewEmail())
             {
                 view.findNavController().navigate(R.id.action_login_to_welcome)
             }
@@ -73,4 +79,5 @@ class LoginStart : Fragment() {
         //returns the root of the xml file being inflated
         return binding.root
     }
+
 }

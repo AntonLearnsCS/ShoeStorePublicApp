@@ -25,16 +25,11 @@
                 android:id="@+id/FAB_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right">
+                android:layout_gravity="right"
+                android:src="@android:drawable/ic_input_add">
 
             </com.google.android.material.floatingactionbutton.FloatingActionButton>
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/test_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right">
 
-            </com.google.android.material.floatingactionbutton.FloatingActionButton>
         </LinearLayout>
 
 
