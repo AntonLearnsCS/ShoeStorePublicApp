@@ -22,6 +22,9 @@
             app:destination="@id/instructions"
             app:popUpTo="@id/welcome"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_welcome_to_shoeList"
+            app:destination="@id/shoeList" />
     </fragment>
     <fragment
         android:id="@+id/shoeList"

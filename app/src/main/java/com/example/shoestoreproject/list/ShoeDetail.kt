@@ -32,7 +32,6 @@ class ShoeDetail  : Fragment() {
         factory = ShoeFactory(scoreFragmentArgs.saved)
         // Inflate the layout for this fragment
         viewModel = ViewModelProvider(requireActivity(),factory).get(ShoeListViewModel::class.java)
-        //shoeList //= ""
 /*
 Create a new Shoe Detail destination that includes:
 

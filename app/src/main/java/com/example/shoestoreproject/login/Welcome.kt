@@ -1,25 +1,23 @@
 package com.example.shoestoreproject.login
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.example.shoestoreproject.MainViewModel
 import com.example.shoestoreproject.R
 import com.example.shoestoreproject.databinding.FragmentWelcomeBinding
+import com.example.shoestoreproject.viewModel //here we are importing the variable from the Main activity; this must be done because the view
+//model in MainActivity is specific to that activity (Main is not declared a fragment)
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_welcome.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Welcome.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Welcome : Fragment() {
 
     /*
@@ -30,10 +28,7 @@ Shoe /ItemListing screen
 Shoe/Item Detail screen for adding a new shoe/item
      */
     private lateinit var binding : FragmentWelcomeBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,13 +41,31 @@ Shoe/Item Detail screen for adding a new shoe/item
             container,
             false
         )
-        binding.nextButton.setOnClickListener { view : View ->
+        Log.i("onCreateWelcome","welcome")
+        //viewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
+        //checks if the current fragment in the NavHostFragment is the Welcome fragment
+        if (myNavHostFragment.childFragmentManager.findFragmentById(R.id.welcome) == welcome)
+        {
+            viewModel.setBackTrue()
+        }
+        else
+        viewModel.setBackFalse()
+
+
+        //doesn't make sense because the statement below assumes that the Welcome fragment has a child fragment
+        //val currentFragment = this.childFragmentManager.getFragments()?.get(0)?.toString() // findFragmentById(R.id.myNavHostFragment).
+        binding.skipButton.setOnClickListener { view: View? ->
+            if (view != null) {
+                viewModel.setBackFalse()
+                view.findNavController().navigate(R.id.action_welcome_to_shoeList)
+            }
+
+        }
+        binding.nextButton.setOnClickListener { view : View ->
+            viewModel.setBackFalse()
             view.findNavController().navigate(R.id.action_welcome_to_instructions) }
         return binding.root
-        //return inflater.inflate(R.layout.fragment_welcome, container, false)
     }
-
-
 
 }

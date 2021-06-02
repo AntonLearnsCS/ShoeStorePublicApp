@@ -35,6 +35,6 @@ class Instructions : Fragment() {
                 view.findNavController().navigate(R.id.action_instructions_to_shoeList)
             }
         }
-        return binding.root//return inflater.inflate(R.layout.fragment_instructions, container, false)
+        return binding.root
     }
 }
