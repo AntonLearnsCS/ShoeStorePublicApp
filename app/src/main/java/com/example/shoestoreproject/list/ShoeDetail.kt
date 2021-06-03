@@ -19,7 +19,7 @@ class ShoeDetail  : Fragment() {
     //    private val model: SharedViewModel by activityViewModels()
     private lateinit var viewModel: ShoeListViewModel//by MainViewModel
     private lateinit var binding : FragmentShoeDetailBinding
-    private lateinit var factory : ShoeFactory
+    //private lateinit var factory : ShoeFactory
     //private lateinit var bindingList : FragmentShoeListBinding
 
     override fun onCreateView(
@@ -27,11 +27,14 @@ class ShoeDetail  : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        //I think we need this factory class since ShoeListViewModel has a parameter and we want shoeList & custom_detail to observe it
-        val scoreFragmentArgs by navArgs<ShoeListArgs>()
-        factory = ShoeFactory(scoreFragmentArgs.saved)
-        // Inflate the layout for this fragment
-        viewModel = ViewModelProvider(requireActivity(),factory).get(ShoeListViewModel::class.java)
+        //We don't actually need a factor to create a custom viewModel since we discovered we can share a common viewModel using requireActivity()
+        //I commented out the code having to do with using a factory to pass in variables from shoeList and shoeDetail; also see code at bottom
+        //for the factory class previously created
+        //ShoeListArgs is the argument passed into the ShoeList fragment
+        //val scoreFragmentArgs by navArgs<ShoeListArgs>()
+        //factory = ShoeFactory(scoreFragmentArgs.saved)
+
+        viewModel = ViewModelProvider(requireActivity()).get(ShoeListViewModel::class.java)
 /*
 Create a new Shoe Detail destination that includes:
 
@@ -63,7 +66,7 @@ A Save button with an action to navigate back to the shoe list screen and add a 
         }
 
         binding.saveButton.setOnClickListener {
-            val saved = viewModel.saved.value
+            //val saved = viewModel.saved.value
 
             if (viewModel.returning.value == true)
             {
@@ -72,58 +75,29 @@ A Save button with an action to navigate back to the shoe list screen and add a 
                 viewModel.array.value?.get(viewModel.id.value!!)?._shoeSize?.value = binding.shoeSizeText.text.toString()
                 viewModel.array.value?.get(viewModel.id.value!!)?._shoeDescription?.value = binding.descriptionText.text.toString()
 
-                viewModel.setBooleanTrue()
-                val action = ShoeDetailDirections.actionShoeDetailToShoeList(saved ?: false)
+                //viewModel.setBooleanTrue()
+                //val action = ShoeDetailDirections.actionShoeDetailToShoeList(saved ?: false)
                 //view.findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
-                findNavController(this).navigate(action)
+                findNavController(this).navigate(R.id.action_shoeDetail_to_shoeList)
             }
             else
             {
+                //viewModel.setBooleanTrue()
+                viewModel.createObject()
+                viewModel.assignCompanyName(binding.companyNameText.text.toString())
+                viewModel.assignShoeDescription(binding.descriptionText.text.toString())
+                viewModel.assignShoeName(binding.shoeNameText.text.toString())
+                viewModel.assignShoeSize(binding.shoeSizeText.text.toString())
 
-            //viewModel.addCustomView()
-            viewModel.setBooleanTrue()
-            viewModel.createObject()
-            viewModel.assignCompanyName(binding.companyNameText.text.toString())
-            viewModel.assignShoeDescription(binding.descriptionText.text.toString())
-            viewModel.assignShoeName(binding.shoeNameText.text.toString())
-            viewModel.assignShoeSize(binding.shoeSizeText.text.toString())
-
-
-            //viewModel._array.value?.get(0)?._companyName?.value = "test"
-            //viewModel.testArray[0]._companyName.value = "otherCompany"
-
-            //viewModel.array.value?.get(0)?._companyName?.value = "sears"//binding.companyNameText.toString()
-
-            if (viewModel.array.value?.get(0)?._companyName?.value != null) //= binding.companyNameText.toString()
-                Log.i("array", viewModel.array.value!![0]._companyName.value.toString())
-            else
-            {
-                viewModel.array.value?.get(0)?._companyName?.value = binding.companyNameText.toString()
-            }
-
-            //update values in array in viewModel object
-            //viewModel.num
-
-
-
-            //TODO: Unsure why "ShoeDetailDirections" became invalid..
-            val action = ShoeDetailDirections.actionShoeDetailToShoeList(saved ?: false)
+            //val action = ShoeDetailDirections.actionShoeDetailToShoeList(saved ?: false)
             //view.findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
-            findNavController(this).navigate(action)
+            findNavController(this).navigate(R.id.action_shoeDetail_to_shoeList)
         }
         }
-
-
-        /*
-          val currentScore = viewModel.score.value ?: 0
-                val action = GameFragmentDirections.actionGameToScore(currentScore)
-                findNavController(this).navigate(action)
-                viewModel.onGameFinishComplete()
-         */
-
 
         return binding.root
     }
+    /*
     fun addView()
     {
         //not sure how to get context in viewModel to use this function there
@@ -131,4 +105,27 @@ A Save button with an action to navigate back to the shoe list screen and add a 
         //A: It would appear not, as we R.layout only gives us access to the xml file name but not the viewGroups within
         //The StackOverflow forums are implying that you must reference the viewGroup within the fragment the viewGroup is attached to.
     }
+     */
 }
+
+/* //factory class before using requireActivity()
+package com.example.shoestoreproject.list
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+
+class ShoeFactory (private val finalScore: Boolean) : ViewModelProvider.Factory {
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+
+            if (modelClass.isAssignableFrom(ShoeListViewModel::class.java)) {
+                return ShoeListViewModel(finalScore) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
+
+
+
+}
+
+
+ */

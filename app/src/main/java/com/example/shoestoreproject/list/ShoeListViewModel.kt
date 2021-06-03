@@ -5,16 +5,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class ShoeListViewModel(saved : Boolean) : ViewModel() {
+class ShoeListViewModel() : ViewModel() {
+    //to access the newly created "LiveDataClass"
     var tempVar = LiveDataClass()
 
+    //encapsulation
     private var _array : MutableLiveData<MutableList<LiveDataClass>>//MutableList<LiveDataClass>
     val array : LiveData<MutableList<LiveDataClass>>
     get() = _array
-
-    private val _counter : MutableLiveData<Int> = MutableLiveData()
-    val counter : LiveData<Int>
-    get() = _counter
 
     private var _returning : MutableLiveData<Boolean> = MutableLiveData()//MutableList<LiveDataClass>
     val returning : LiveData<Boolean>
@@ -24,26 +22,15 @@ class ShoeListViewModel(saved : Boolean) : ViewModel() {
     val id : LiveData<Int>
         get() = _id
 
-    private val _saved = MutableLiveData<Boolean>()
-    val saved : LiveData<Boolean>
-    get() = _saved
+
 
     //Q: Why can't you reference the mutableList object "array" outside of a method?
 
     init {
-        _saved.value = saved
-        _array = MutableLiveData(mutableListOf<LiveDataClass>())//MutableLiveData() //Collection<LiveDataClass>
-        _counter.value = 0
+        _array = MutableLiveData(mutableListOf())//MutableLiveData() //Collection<LiveDataClass>
         _returning.value = false
     }
-    fun setReturnTrue()
-    {
-        _returning.value = true
-    }
-    fun setReturnFalse()
-    {
-        _returning.value = false
-    }
+
     fun createObject()
     {
         //pass in the information from custom_detail to here
@@ -51,8 +38,6 @@ class ShoeListViewModel(saved : Boolean) : ViewModel() {
         tempVar = myObject
 
         _array.value?.add(myObject)
-
-        _counter.value = _counter.value?.plus(1)
     }
 
     class LiveDataClass()
@@ -80,14 +65,20 @@ class ShoeListViewModel(saved : Boolean) : ViewModel() {
     {
         tempVar._shoeDescription.value = name
     }
-    fun setBooleanTrue()
-    {
-        _saved.value = true
-    }
+
+
+
     fun setId(value : Int)
     {
         _id.value = value
     }
-
+    fun setReturnTrue()
+    {
+        _returning.value = true
+    }
+    fun setReturnFalse()
+    {
+        _returning.value = false
+    }
 }
 
