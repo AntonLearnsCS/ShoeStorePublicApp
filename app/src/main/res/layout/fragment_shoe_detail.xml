@@ -5,6 +5,11 @@
 
     >
 
+    <data>
+        <variable
+            name="shoeDetail"
+            type="com.example.shoestoreproject.list.ShoeDetail" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -12,41 +17,53 @@
         android:id="@+id/layout_id"
         >
 
-
+<!-- If I didn't anchor the button to the views boxes at the top
+ using constraint layout, the screen would move too far down after
+ editing the view boxes-->
         <Button
             android:id="@+id/save_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:text="Save"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shoeSize_text"
+            app:layout_constraintVertical_bias="0.997" />
 
         <Button
             android:id="@+id/cancel_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
             android:text="cancel"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shoeSize_text"
+            app:layout_constraintVertical_bias="0.995" />
 
-        <TextView
-            android:id="@+id/label_text"
-            android:layout_width="69dp"
-            android:layout_height="48dp"
-            android:text="TextView"
+        <EditText
+            android:id="@+id/num_Stock"
+            android:layout_width="83dp"
+            android:layout_height="67dp"
+            android:hint="Stock:"
+            android:text=""
+            android:imeOptions="actionDone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/companyName_text"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.028" />
+            app:layout_constraintVertical_bias="0.028"
+            />
 
         <EditText
             android:id="@+id/shoeName_text"
             android:layout_width="@dimen/width"
             android:layout_height="@dimen/height"
+            android:layout_marginEnd="4dp"
             android:ems="10"
+            android:hint="Shoe Name"
             android:inputType="textPersonName"
-            android:text="Name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,9 +71,10 @@
             android:id="@+id/companyName_text"
             android:layout_width="142dp"
             android:layout_height="@dimen/height"
+            android:layout_marginEnd="20dp"
             android:ems="10"
+            android:hint="Company Name"
             android:inputType="textPersonName"
-            android:text="Name"
             app:layout_constraintEnd_toStartOf="@+id/shoeName_text"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,9 +83,10 @@
             android:layout_width="@dimen/width"
             android:layout_height="@dimen/height"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="20dp"
             android:ems="10"
+            android:hint="Shoe Size"
             android:inputType="textPersonName"
-            android:text="Name"
             app:layout_constraintEnd_toStartOf="@+id/description_text"
             app:layout_constraintTop_toBottomOf="@+id/companyName_text" />
 
@@ -76,9 +95,10 @@
             android:layout_width="@dimen/width"
             android:layout_height="@dimen/height"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="4dp"
             android:ems="10"
+            android:hint="Description"
             android:inputType="textPersonName"
-            android:text="Name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shoeName_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -60,6 +60,7 @@ A Save button with an action to navigate back to the shoe list screen and add a 
             binding.shoeNameText.setText(viewModel.array.value?.get(viewModel.id.value!!)?._shoeName?.value.toString())
             binding.shoeSizeText.setText(viewModel.array.value?.get(viewModel.id.value!!)?._shoeSize?.value.toString())
             binding.descriptionText.setText(viewModel.array.value?.get(viewModel.id.value!!)?._shoeDescription?.value.toString())
+            binding.numStock.setText(viewModel.array.value?.get(viewModel.id.value!!)?._numStock?.value.toString())
 
             //binding.companyNameText.text = (viewModel.array.value?.get(viewModel.id.value)?)._companyName.value.toString()
                //viewModel.id.value?.let { it1 -> viewModel.array.value?.get(it1) }
@@ -74,6 +75,7 @@ A Save button with an action to navigate back to the shoe list screen and add a 
                 viewModel.array.value?.get(viewModel.id.value!!)?._shoeName?.value = binding.shoeNameText.text.toString()
                 viewModel.array.value?.get(viewModel.id.value!!)?._shoeSize?.value = binding.shoeSizeText.text.toString()
                 viewModel.array.value?.get(viewModel.id.value!!)?._shoeDescription?.value = binding.descriptionText.text.toString()
+                viewModel.array.value?.get(viewModel.id.value!!)?._numStock?.value = binding.numStock.text.toString()
 
                 //viewModel.setBooleanTrue()
                 //val action = ShoeDetailDirections.actionShoeDetailToShoeList(saved ?: false)
@@ -88,7 +90,7 @@ A Save button with an action to navigate back to the shoe list screen and add a 
                 viewModel.assignShoeDescription(binding.descriptionText.text.toString())
                 viewModel.assignShoeName(binding.shoeNameText.text.toString())
                 viewModel.assignShoeSize(binding.shoeSizeText.text.toString())
-
+                viewModel.assignNumStock(binding.numStock.text.toString())
             //val action = ShoeDetailDirections.actionShoeDetailToShoeList(saved ?: false)
             //view.findNavController().navigate(R.id.action_gameWonFragment_to_gameFragment)
             findNavController(this).navigate(R.id.action_shoeDetail_to_shoeList)

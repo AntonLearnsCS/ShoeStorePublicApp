@@ -23,7 +23,12 @@ import com.example.shoestoreproject.databinding.CustomDetailBinding
 import com.example.shoestoreproject.databinding.FragmentShoeListBinding
 import kotlinx.android.synthetic.main.custom_detail.*
 import kotlinx.android.synthetic.main.custom_detail.view.*
+import kotlinx.android.synthetic.main.custom_detail.view.companyName_text
 import kotlinx.android.synthetic.main.custom_detail.view.constraintLayout
+import kotlinx.android.synthetic.main.custom_detail.view.description_text
+import kotlinx.android.synthetic.main.custom_detail.view.shoeName_text
+import kotlinx.android.synthetic.main.custom_detail.view.shoeSize_text
+import kotlinx.android.synthetic.main.fragment_shoe_detail.view.*
 import timber.log.Timber
 
 
@@ -147,6 +152,10 @@ class ShoeList : Fragment() {
         val textViewShoeDescription = v.findViewById<View>(R.id.description_text) as EditText
         textViewShoeDescription.description_text.setText(viewModel.array.value?.get(index)?._shoeDescription?.value.toString())
 
+        val textViewNumStock = v.findViewById<View>(R.id.num_Inventory) as EditText
+        textViewNumStock.num_Inventory.setText("Stock: ")
+        textViewNumStock.num_Inventory.append(viewModel.array.value?.get(index)?._numStock?.value.toString())
+
         //creates a button for each view, would be interesting to instead select a view and select an "Edit" button
         v.button.setOnClickListener()
         {
@@ -159,7 +168,7 @@ class ShoeList : Fragment() {
         v.shoeName_text.isFocusable = false
         v.shoeSize_text.isFocusable = false
         v.description_text.isFocusable = false
-
+        v.num_Inventory.isFocusable = false
         myLayout.addView(v)
 
         //getChildAt() returns the view at the specified position in the group.

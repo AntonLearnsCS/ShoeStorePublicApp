@@ -46,7 +46,7 @@ class ShoeListViewModel() : ViewModel() {
         var _shoeName = MutableLiveData<String>()
         var _shoeSize = MutableLiveData<String>()
         var _shoeDescription = MutableLiveData<String>()
-
+        var _numStock = MutableLiveData<String>()
     }
 
     fun assignCompanyName(name : String)
@@ -64,6 +64,10 @@ class ShoeListViewModel() : ViewModel() {
     fun assignShoeDescription(name : String)
     {
         tempVar._shoeDescription.value = name
+    }
+    fun assignNumStock(num : String)
+    {
+        tempVar._numStock.value = num
     }
 
 
