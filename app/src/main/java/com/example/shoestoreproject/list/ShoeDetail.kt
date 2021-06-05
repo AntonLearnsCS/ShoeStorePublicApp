@@ -54,19 +54,6 @@ A Save button with an action to navigate back to the shoe list screen and add a 
         binding.cancelButton.setOnClickListener { findNavController(this).navigate(R.id.action_shoeDetail_to_shoeList)
         }
         //pass in the id of the selected view
-        if (viewModel.returning.value == true)
-        {
-            //Sets the shoeDetail to the previously inputted strings
-            //Use setText(String), since editText.text expects an Editable, not a String.
-            binding.companyNameText.setText(viewModel.array.value?.get(viewModel.id.value!!)?._companyName?.value.toString())
-            binding.shoeNameText.setText(viewModel.array.value?.get(viewModel.id.value!!)?._shoeName?.value.toString())
-            binding.shoeSizeText.setText(viewModel.array.value?.get(viewModel.id.value!!)?._shoeSize?.value.toString())
-            binding.descriptionText.setText(viewModel.array.value?.get(viewModel.id.value!!)?._shoeDescription?.value.toString())
-            binding.numStock.setText(viewModel.array.value?.get(viewModel.id.value!!)?._numStock?.value.toString())
-
-            //binding.companyNameText.text = (viewModel.array.value?.get(viewModel.id.value)?)._companyName.value.toString()
-               //viewModel.id.value?.let { it1 -> viewModel.array.value?.get(it1) }
-        }
 
         binding.saveButton.setOnClickListener {
             //val saved = viewModel.saved.value

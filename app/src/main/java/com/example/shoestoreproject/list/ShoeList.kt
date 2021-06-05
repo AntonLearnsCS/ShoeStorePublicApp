@@ -96,7 +96,6 @@ class ShoeList : Fragment() {
         //A: Use requireActivity instead of "this" to ensure that the viewModel is tied to the activity.
         viewModel = ViewModelProvider(requireActivity()).get(ShoeListViewModel::class.java)
         customBinding.customDetail = viewModel
-
         //used to track if navigation is returning from an edit of a shoeDetail view
         viewModel.setReturnFalse()
 
@@ -133,8 +132,9 @@ class ShoeList : Fragment() {
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
         )
+
         //Q: How to add a viewGroup so that I wont have to create a variable for each textView in the customView layout
-        /*
+
         //The textViews act as intermediaries so we can edit the view "v"
         val textViewCompanyName = v.findViewById<View>(R.id.companyName_text) as EditText
         //note: "companyName_text" is synthetic
@@ -155,7 +155,7 @@ class ShoeList : Fragment() {
 
         //creates a button for each view, would be interesting to instead select a view and select an "Edit" button
 
-         */
+
         v.button.setOnClickListener()
         {
             viewModel.setReturnTrue()
@@ -168,6 +168,7 @@ class ShoeList : Fragment() {
         v.shoeSize_text.isFocusable = false
         v.description_text.isFocusable = false
         v.num_Inventory.isFocusable = false
+
         myLayout.addView(v)
 
         //getChildAt() returns the view at the specified position in the group.
@@ -186,6 +187,10 @@ class ShoeList : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
                 || super.onOptionsItemSelected(item)
+    }
+    fun getShoeName(): String
+    {
+        return viewModel.array.value?.get(viewModel.id.value!!)?._shoeName.toString()
     }
 /* alternative method, incomplete
     fun returnToDetail()

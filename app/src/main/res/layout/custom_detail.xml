@@ -32,6 +32,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 <!--             android:onClick="@{() -> shoeListCustom.returnToDetail()}"
 -->
+        <!-- Note: Incomplete, text is not reliant on the call to the function in the xml but is initialized in ShoeList
+        Q: Need to create data binding for each view added?-->
         <EditText
             android:id="@+id/shoeName_text"
             android:layout_width="@dimen/width"
@@ -45,7 +47,6 @@
             app:layout_constraintStart_toEndOf="@+id/companyName_text"
             app:layout_constraintTop_toTopOf="@+id/button"
             app:layout_constraintVertical_chainStyle="packed" />
-
 
         <EditText
             android:id="@+id/description_text"
