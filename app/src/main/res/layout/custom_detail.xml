@@ -10,9 +10,6 @@
         <variable
             name="customDetail"
             type="com.example.shoestoreproject.list.ShoeListViewModel" />
-        <variable
-            name="shoeListV"
-            type="com.example.shoestoreproject.list.ShoeList" />
     </data>
 
 
@@ -35,6 +32,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 <!--             android:onClick="@{() -> shoeListCustom.returnToDetail()}"
 -->
+        <!-- Note: Incomplete, text is not reliant on the call to the function in the xml but is initialized in ShoeList
+        Q: Need to create data binding for each view added?-->
         <EditText
             android:id="@+id/shoeName_text"
             android:layout_width="@dimen/width"
@@ -43,12 +42,11 @@
             android:layout_marginTop="8dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text=""
+            android:text="@{customDetail.xmlShoeName()}"
             app:layout_constraintBottom_toTopOf="@+id/description_text"
             app:layout_constraintStart_toEndOf="@+id/companyName_text"
             app:layout_constraintTop_toTopOf="@+id/button"
             app:layout_constraintVertical_chainStyle="packed" />
-<!-- @{customDetail.xmlShoeName()}-->
 
         <EditText
             android:id="@+id/description_text"

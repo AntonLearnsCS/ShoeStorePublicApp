@@ -96,7 +96,6 @@ class ShoeList : Fragment() {
         //A: Use requireActivity instead of "this" to ensure that the viewModel is tied to the activity.
         viewModel = ViewModelProvider(requireActivity()).get(ShoeListViewModel::class.java)
         customBinding.customDetail = viewModel
-        customBinding.shoeListV = this
         //used to track if navigation is returning from an edit of a shoeDetail view
         viewModel.setReturnFalse()
 
@@ -141,8 +140,8 @@ class ShoeList : Fragment() {
         //note: "companyName_text" is synthetic
         textViewCompanyName.companyName_text.setText( viewModel.array.value?.get(index)?._companyName?.value.toString())
 
-        val textViewShoeName = v.findViewById<View>(R.id.shoeName_text) as EditText
-        textViewShoeName.shoeName_text.setText(viewModel.array.value?.get(index)?._shoeName?.value.toString())
+        //val textViewShoeName = v.findViewById<View>(R.id.shoeName_text) as EditText
+        //textViewShoeName.shoeName_text.setText(viewModel.array.value?.get(index)?._shoeName?.value.toString())
 
         val textViewShoeSize = v.findViewById<View>(R.id.shoeSize_text) as EditText
         textViewShoeSize.shoeSize_text.setText(viewModel.array.value?.get(index)?._shoeSize?.value.toString())
