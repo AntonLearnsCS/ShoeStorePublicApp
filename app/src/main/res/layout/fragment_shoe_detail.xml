@@ -8,7 +8,7 @@
     <data>
         <variable
             name="shoeDetail"
-            type="com.example.shoestoreproject.list.ShoeDetail" />
+            type="com.example.shoestoreproject.list.ShoeListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,13 +41,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shoeSize_text"
             app:layout_constraintVertical_bias="0.995" />
-
+<!-- Q: Is there a way I can set the editText to the hint if shoeDetail.returning is false? -->
         <EditText
             android:id="@+id/num_Stock"
             android:layout_width="83dp"
             android:layout_height="67dp"
-            android:hint="Stock:"
-            android:text=""
+            android:text="@{ shoeDetail.returning ? shoeDetail.array.get(shoeDetail.id)._numStock.toString() : false}"
             android:imeOptions="actionDone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/companyName_text"
@@ -62,11 +61,12 @@
             android:layout_height="@dimen/height"
             android:layout_marginEnd="4dp"
             android:ems="10"
-            android:hint="Shoe Name"
+            android:text="@{ shoeDetail.returning ? shoeDetail.array.get(shoeDetail.id)._shoeName.toString() : false}"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
+<!--             android:hint="@{shoeDetail.returning ? '0' : shoeDetail.test()}"
+-->
         <EditText
             android:id="@+id/companyName_text"
             android:layout_width="142dp"

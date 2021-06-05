@@ -84,5 +84,9 @@ class ShoeListViewModel() : ViewModel() {
     {
         _returning.value = false
     }
+    fun test() : String
+    {
+        return "Shoe Name"
+    }
 }
 
