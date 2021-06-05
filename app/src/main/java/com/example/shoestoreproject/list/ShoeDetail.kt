@@ -49,6 +49,8 @@ A Save button with an action to navigate back to the shoe list screen and add a 
             container,
             false
         )
+        binding.shoeDetail = viewModel
+
         binding.cancelButton.setOnClickListener { findNavController(this).navigate(R.id.action_shoeDetail_to_shoeList)
         }
         //pass in the id of the selected view
@@ -108,6 +110,7 @@ A Save button with an action to navigate back to the shoe list screen and add a 
         //The StackOverflow forums are implying that you must reference the viewGroup within the fragment the viewGroup is attached to.
     }
      */
+
 }
 
 /* //factory class before using requireActivity()

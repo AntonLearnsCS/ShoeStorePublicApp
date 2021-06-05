@@ -84,5 +84,43 @@ class ShoeListViewModel() : ViewModel() {
     {
         _returning.value = false
     }
+
+    //Q: Can I fill the xml boxes with one function call?
+    fun xmlCompanyName() : String
+    {
+        if (_returning.value == true)
+            return _array.value?.get(_id.value!!)?._companyName?.value.toString()
+        else
+        return "Company Name"
+    }
+    fun xmlShoeName() : String
+    {
+        if (_returning.value == true)
+            return _array.value?.get(_id.value!!)?._shoeName?.value.toString()
+        else
+            return "Shoe Name"
+    }
+    fun xmlNumStock() : String
+    {
+        if (_returning.value == true)
+            return _array.value?.get(_id.value!!)?._numStock?.value.toString()
+        else
+            return "Stock"
+    }
+    fun xmlShoeSize() : String
+    {
+        if (_returning.value == true)
+            return _array.value?.get(_id.value!!)?._shoeSize?.value.toString()
+        else
+            return "Shoe Size"
+    }
+    fun xmlDescription() : String
+    {
+        if (_returning.value == true)
+            return _array.value?.get(_id.value!!)?._shoeDescription?.value.toString()
+        else
+            return "Description"
+    }
+
 }
 

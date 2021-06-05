@@ -35,6 +35,7 @@ import timber.log.Timber
 class ShoeList : Fragment() {
     private lateinit var viewModel : ShoeListViewModel
     private lateinit var binding : FragmentShoeListBinding
+    private lateinit var customBinding : CustomDetailBinding
 
     //Q: bindingCustomm is not triggering the returnDetail function
    // private lateinit var bindingCustom : CustomDetailBinding
@@ -56,7 +57,12 @@ class ShoeList : Fragment() {
             container,
             false
         )
-
+        customBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.custom_detail,
+            container,
+            false
+        )
             /*
         bindingCustom = DataBindingUtil.inflate(
             inflater,
@@ -89,6 +95,7 @@ class ShoeList : Fragment() {
         //Q: Why is LiveData is reverting to its default value?
         //A: Use requireActivity instead of "this" to ensure that the viewModel is tied to the activity.
         viewModel = ViewModelProvider(requireActivity()).get(ShoeListViewModel::class.java)
+        customBinding.customDetail = viewModel
 
         //used to track if navigation is returning from an edit of a shoeDetail view
         viewModel.setReturnFalse()
@@ -97,21 +104,11 @@ class ShoeList : Fragment() {
         viewModel.array.observe(viewLifecycleOwner, Observer { array ->
             if (!array.isEmpty()){
                 viewModel.array.value!!.forEachIndexed{ index, element ->
+                    viewModel.setId(index)
                     addCustomView(index)
                 }
             }
         })
-        //Q: Will this refer to the button on the customView?
-        // A: As shown here, Log.i("arrayConstraintIdReal",v.constraintLayout.id.toString()), we've created a synthetic constraintLayout
-        //which doesn't really have a use. This layout has not been inflated/initialized as with "v" in addCustomView so it returns a null
-        // object reference
-        /*
-        if (viewModel.saved.value == true){
-        this.constraintLayout.getViewById(R.id.constraintLayout).button.setOnClickListener {
-                view: View? ->  view?.findNavController()?.navigate(R.id.action_shoeList_to_shoeDetail)
-        }}
-         */
-
 
         //lets compiler know that the fragment has an options menu
         setHasOptionsMenu(true)
@@ -137,14 +134,14 @@ class ShoeList : Fragment() {
             )
         )
         //Q: How to add a viewGroup so that I wont have to create a variable for each textView in the customView layout
-
+        /*
         //The textViews act as intermediaries so we can edit the view "v"
         val textViewCompanyName = v.findViewById<View>(R.id.companyName_text) as EditText
         //note: "companyName_text" is synthetic
         textViewCompanyName.companyName_text.setText( viewModel.array.value?.get(index)?._companyName?.value.toString())
 
-        val textViewShoeName = v.findViewById<View>(R.id.shoeName_text) as EditText
-        textViewShoeName.shoeName_text.setText(viewModel.array.value?.get(index)?._shoeName?.value.toString())
+        //val textViewShoeName = v.findViewById<View>(R.id.shoeName_text) as EditText
+        //textViewShoeName.shoeName_text.setText(viewModel.array.value?.get(index)?._shoeName?.value.toString())
 
         val textViewShoeSize = v.findViewById<View>(R.id.shoeSize_text) as EditText
         textViewShoeSize.shoeSize_text.setText(viewModel.array.value?.get(index)?._shoeSize?.value.toString())
@@ -157,6 +154,8 @@ class ShoeList : Fragment() {
         textViewNumStock.num_Inventory.append(viewModel.array.value?.get(index)?._numStock?.value.toString())
 
         //creates a button for each view, would be interesting to instead select a view and select an "Edit" button
+
+         */
         v.button.setOnClickListener()
         {
             viewModel.setReturnTrue()
@@ -198,3 +197,14 @@ class ShoeList : Fragment() {
 
  */
 }
+//Q: Will this refer to the button on the customView?
+// A: As shown here, Log.i("arrayConstraintIdReal",v.constraintLayout.id.toString()), we've created a synthetic constraintLayout
+//which doesn't really have a use. This layout has not been inflated/initialized as with "v" in addCustomView so it returns a null
+// object reference
+/*
+if (viewModel.saved.value == true){
+this.constraintLayout.getViewById(R.id.constraintLayout).button.setOnClickListener {
+        view: View? ->  view?.findNavController()?.navigate(R.id.action_shoeList_to_shoeDetail)
+}}
+ */
+
