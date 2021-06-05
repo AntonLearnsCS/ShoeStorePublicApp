@@ -5,8 +5,6 @@
     android:orientation="vertical"
     >
 
-    <!-- Note: We do not set the width and height of layout if we are declaring
-    multiple view/view groups-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

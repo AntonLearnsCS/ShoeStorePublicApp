@@ -17,9 +17,6 @@
         android:id="@+id/layout_id"
         >
 
-<!-- If I didn't anchor the button to the views boxes at the top
- using constraint layout, the screen would move too far down after
- editing the view boxes-->
         <Button
             android:id="@+id/save_button"
             android:layout_width="wrap_content"
@@ -54,7 +51,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.028"
             />
-        <!--Q: Why can't I set the false catch statement to a character: shoeDetail.returning ? shoeDetail.array.get(shoeDetail.id)._shoeName.toString() : shoeDetail.xmlShoeName() -->
+
         <EditText
             android:id="@+id/shoeName_text"
             android:layout_width="@dimen/width"
@@ -65,8 +62,7 @@
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-<!--             android:hint="@{shoeDetail.returning ? '0' : shoeDetail.test()}"
--->
+
         <EditText
             android:id="@+id/companyName_text"
             android:layout_width="142dp"

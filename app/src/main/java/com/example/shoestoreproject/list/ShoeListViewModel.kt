@@ -1,12 +1,16 @@
 package com.example.shoestoreproject.list
 
+import android.content.Context
 import android.util.Log
+import android.view.LayoutInflater
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class ShoeListViewModel() : ViewModel() {
-    //to access the newly created "LiveDataClass"
+
+    //Used to access the newly created "LiveDataClass"
     var tempVar = LiveDataClass()
 
     //encapsulation
@@ -85,7 +89,7 @@ class ShoeListViewModel() : ViewModel() {
         _returning.value = false
     }
 
-    //Q: Can I fill the xml boxes with one function call?
+    //used for shoeDetail xml
     fun xmlCompanyName() : String
     {
         if (_returning.value == true)
@@ -93,6 +97,7 @@ class ShoeListViewModel() : ViewModel() {
         else
         return "Company Name"
     }
+
     fun xmlShoeName() : String
     {
         if (_returning.value == true)
@@ -121,6 +126,5 @@ class ShoeListViewModel() : ViewModel() {
         else
             return "Description"
     }
-
 }
 

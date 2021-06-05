@@ -6,14 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
-    <data>
-        <variable
-            name="customDetail"
-            type="com.example.shoestoreproject.list.ShoeListViewModel" />
-    </data>
-
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
@@ -30,11 +22,8 @@
             android:text="Detail"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-<!--             android:onClick="@{() -> shoeListCustom.returnToDetail()}"
--->
-        <!-- Note: Incomplete, text is not reliant on the call to the function in the xml but is initialized in ShoeList
-        Q: Need to create data binding for each view added?-->
-        <EditText
+
+        <TextView
             android:id="@+id/shoeName_text"
             android:layout_width="@dimen/width"
             android:layout_height="@dimen/height"
@@ -42,43 +31,48 @@
             android:layout_marginTop="8dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@{customDetail.xmlShoeName()}"
+            android:hint="Shoe Name"
+            android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/description_text"
             app:layout_constraintStart_toEndOf="@+id/companyName_text"
             app:layout_constraintTop_toTopOf="@+id/button"
             app:layout_constraintVertical_chainStyle="packed" />
 
-        <EditText
+        <TextView
             android:id="@+id/description_text"
             android:layout_width="@dimen/width"
             android:layout_height="@dimen/height"
             android:hint="Description"
+            android:textSize="20dp"
             android:layout_marginStart="5dp"
             android:ems="10"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="@+id/button"
             app:layout_constraintStart_toEndOf="@+id/shoeSize_text"
             app:layout_constraintTop_toBottomOf="@+id/shoeName_text" />
-        <EditText
+
+        <TextView
             android:id="@+id/shoeSize_text"
             android:layout_width="@dimen/width"
             android:layout_height="@dimen/height"
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="Shoe size"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/button"
             app:layout_constraintEnd_toEndOf="@+id/companyName_text"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/companyName_text"
             app:layout_constraintTop_toBottomOf="@+id/companyName_text" />
 
-        <EditText
+        <TextView
             android:id="@+id/companyName_text"
             android:layout_width="@dimen/width"
             android:layout_height="@dimen/height"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:ems="10"
+            android:textSize="20dp"
             android:inputType="textPersonName"
             android:hint="Company Name"
             app:layout_constraintBottom_toTopOf="@+id/shoeSize_text"
@@ -87,12 +81,13 @@
             app:layout_constraintVertical_chainStyle="packed" />
 
 
-        <EditText
+        <TextView
             android:id="@+id/num_Inventory"
             android:layout_width="387dp"
             android:layout_height="40dp"
             android:layout_marginTop="16dp"
             android:ems="10"
+            android:textSize="20dp"
             android:hint="Number in stock: "
             android:inputType="textPersonName"
             android:imeOptions="actionDone"
