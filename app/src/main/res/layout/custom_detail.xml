@@ -10,6 +10,9 @@
         <variable
             name="customDetail"
             type="com.example.shoestoreproject.list.ShoeListViewModel" />
+        <variable
+            name="shoeListV"
+            type="com.example.shoestoreproject.list.ShoeList" />
     </data>
 
 
@@ -40,12 +43,12 @@
             android:layout_marginTop="8dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@{customDetail.xmlShoeName()}"
+            android:text=""
             app:layout_constraintBottom_toTopOf="@+id/description_text"
             app:layout_constraintStart_toEndOf="@+id/companyName_text"
             app:layout_constraintTop_toTopOf="@+id/button"
             app:layout_constraintVertical_chainStyle="packed" />
-
+<!-- @{customDetail.xmlShoeName()}-->
 
         <EditText
             android:id="@+id/description_text"
