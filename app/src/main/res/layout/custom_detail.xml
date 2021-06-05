@@ -5,13 +5,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-    <!--
+
     <data>
         <variable
-            name="shoeListCustom"
-            type="com.example.shoestoreproject.list.ShoeList" />
+            name="customDetail"
+            type="com.example.shoestoreproject.list.ShoeListViewModel" />
     </data>
-    -->
+
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,7 +40,7 @@
             android:layout_marginTop="8dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:hint="Shoe Name"
+            android:text="@{customDetail.xmlShoeName()}"
             app:layout_constraintBottom_toTopOf="@+id/description_text"
             app:layout_constraintStart_toEndOf="@+id/companyName_text"
             app:layout_constraintTop_toTopOf="@+id/button"

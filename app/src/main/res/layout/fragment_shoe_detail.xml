@@ -46,7 +46,7 @@
             android:id="@+id/num_Stock"
             android:layout_width="83dp"
             android:layout_height="67dp"
-            android:text="@{ shoeDetail.returning ? shoeDetail.array.get(shoeDetail.id)._numStock.toString() : false}"
+            android:text="@{ shoeDetail.xmlNumStock()}"
             android:imeOptions="actionDone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/companyName_text"
@@ -54,14 +54,14 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.028"
             />
-
+        <!--Q: Why can't I set the false catch statement to a character: shoeDetail.returning ? shoeDetail.array.get(shoeDetail.id)._shoeName.toString() : shoeDetail.xmlShoeName() -->
         <EditText
             android:id="@+id/shoeName_text"
             android:layout_width="@dimen/width"
             android:layout_height="@dimen/height"
             android:layout_marginEnd="4dp"
             android:ems="10"
-            android:text="@{ shoeDetail.returning ? shoeDetail.array.get(shoeDetail.id)._shoeName.toString() : false}"
+            android:text="@{ shoeDetail.xmlShoeName()}"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -73,7 +73,7 @@
             android:layout_height="@dimen/height"
             android:layout_marginEnd="20dp"
             android:ems="10"
-            android:hint="Company Name"
+            android:text="@{ shoeDetail.xmlCompanyName()}"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toStartOf="@+id/shoeName_text"
             app:layout_constraintTop_toTopOf="parent" />
@@ -85,7 +85,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="20dp"
             android:ems="10"
-            android:hint="Shoe Size"
+            android:text="@{shoeDetail.xmlShoeSize()}"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toStartOf="@+id/description_text"
             app:layout_constraintTop_toBottomOf="@+id/companyName_text" />
@@ -97,7 +97,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginEnd="4dp"
             android:ems="10"
-            android:hint="Description"
+            android:text="@{shoeDetail.xmlDescription()}"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shoeName_text" />
