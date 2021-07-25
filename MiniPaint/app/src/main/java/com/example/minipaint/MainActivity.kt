@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         hideSystemUI()
         showSystemUI()
 
+
         myCanvasView.contentDescription = getString(R.string.canvasContentDescription)
         setContentView(myCanvasView)
 
@@ -45,9 +46,9 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, true)
         WindowInsetsControllerCompat(window, myGlobalCanvasView).show(WindowInsetsCompat.Type.systemBars())
     }
-    //TODO: How to implement "myCanvasView.systemUiVisibility = SYSTEM_UI_FLAG_FULLSCREEN" given it is depracated, currently
+    //Q:: How to implement "myCanvasView.systemUiVisibility = SYSTEM_UI_FLAG_FULLSCREEN" given it is depracated, currently
     // following link below
-    //TODO: reference: https://stackoverflow.com/questions/62577645/android-view-view-systemuivisibility-deprecated-what-is-the-replacement
+    //A: reference: https://stackoverflow.com/questions/62577645/android-view-view-systemuivisibility-deprecated-what-is-the-replacement
    /* private fun hideSystemUI() {
     WindowCompat.setDecorFitsSystemWindows(window, false)
     WindowInsetsControllerCompat(window, mainContainer).let { controller ->

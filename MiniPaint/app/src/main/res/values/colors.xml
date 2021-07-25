@@ -6,4 +6,5 @@
 
     <color name="colorBackground">#FFFF5500</color>
     <color name="colorPaint">#FFFFEB3B</color>
+    <!-- Note that the first two hexadecimal digits are for the alpha channel. The format is #AARRGGBB, where AA is the alpha channel.-->
 </resources>

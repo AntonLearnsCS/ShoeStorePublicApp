@@ -6,11 +6,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.0.2"
-        //Q:Build tells me Gradle plugin is deprecated. Checking tools -> Kotlin -> Configure Kotlin updates shows 1.4.21 is the
-        // latest version
-        //A: Remove the kotlin-extensions plug-in as that referred to a deprecated style/method
-        //reference: https://stackoverflow.com/questions/65179275/the-kotlin-android-extensions-gradle-plugin-is-deprecated
+        classpath "com.android.tools.build:gradle:4.0.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong

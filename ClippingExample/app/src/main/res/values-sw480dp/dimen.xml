@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The qualifier ensures that these attributes will only be used by devices that have a width >= 480 dp
+If we specify the needed dp, then by the relation: px = dp * (dpi / 160), we can specify the needed "px" for this resource to be
+used.
+-->
+<resources>
+    <dimen name="clipRectRight">120dp</dimen>
+    <dimen name="clipRectBottom">120dp</dimen>
+
+    <dimen name="rectInset">10dp</dimen>
+    <dimen name="smallRectOffset">50dp</dimen>
+
+    <dimen name="circleRadius">40dp</dimen>
+    <dimen name="textOffset">25dp</dimen>
+    <dimen name="strokeWidth">6dp</dimen>
+</resources>
