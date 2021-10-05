@@ -40,4 +40,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
+
+
+    /*val client = OkHttpClient()
+
+    val request = Request.Builder()
+            .url("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/quickAnswer?q=How%20much%20vitamin%20c%20is%20in%202%20apples%3F")
+            .get()
+            .addHeader("x-rapidapi-host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
+            .addHeader("x-rapidapi-key", "743dd97869msh559abee3f899bd4p131dd1jsn866e00036c54")
+            .build()
+
+    val response = client.newCall(request).execute()*/
 }
