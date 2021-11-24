@@ -6,8 +6,9 @@ and is meant to be used for inventory keeping.
 
 Developed using Udacity Rubric from Android App Development (Kotlin) nanodegree
 
-###Language
+##Language
 Kotlin
-###Libraries
+
+##Libraries
 AndroidX
 
