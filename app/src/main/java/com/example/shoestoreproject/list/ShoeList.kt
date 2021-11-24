@@ -81,6 +81,7 @@ class ShoeList : Fragment() {
 
 
     fun addCustomView(index: Int): (Any) -> Unit {
+
         //https://stackoverflow.com/questions/6216547/android-dynamically-add-views-into-view
         val vi: LayoutInflater =
             this.context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
