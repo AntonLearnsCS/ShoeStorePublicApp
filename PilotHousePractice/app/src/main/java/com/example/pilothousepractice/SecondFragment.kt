@@ -25,6 +25,8 @@ class SecondFragment : Fragment() {
     ): View? {
 
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        val arg = SecondFragmentArgs.fromBundle(requireArguments()).mArg
+        _binding!!.textviewSecond.text = arg
         return binding.root
 
     }
@@ -35,6 +37,7 @@ class SecondFragment : Fragment() {
         binding.buttonSecond.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
+
     }
 
     override fun onDestroyView() {
