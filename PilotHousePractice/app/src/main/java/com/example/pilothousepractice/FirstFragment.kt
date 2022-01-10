@@ -42,7 +42,7 @@ class FirstFragment : Fragment() {
 
         val recyclerView = binding.recyclerView
         recyclerView.adapter = adapter
-        adapter.data = List
+        adapter.submitList(List)
 
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(FirstFragmentDirections.actionFirstFragmentToSecondFragment("mString"))
